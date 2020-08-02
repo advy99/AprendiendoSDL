@@ -1,5 +1,15 @@
 # AprendiendoSDL
 
-En verano he decidido aprender algo de SDL utilizando C++.
+ Utilizo el libro SDL Game Development, y aquí subiré el código del proyecto.
 
-Utilizar dos fuentes, el tutorial de Lazy Foo, y el libro SDL Game Development. Podéis encontrar más información de estas fuentes en el README de sus carpetas.
+
+# Soporte
+
+De momento esta pensado para compilarlo usando GNU/Linux y es necesario tener instalado SDL2
+
+
+Puedes compilarlo con:
+
+```sh
+make
+```
