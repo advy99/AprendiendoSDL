@@ -34,11 +34,11 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 			gRenderer = SDL_CreateRenderer(gWindow, -1, 0);
 
 			if (gRenderer == nullptr){
-				SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 255);
-			} else {
 				std::cerr << "Renderer could not be created. STD_Error: "
-							 << SDL_GetError() << std::endl;
+							 << SDL_GetError() << "." << std::endl;
 				success = false;
+			} else {
+				SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 255);
 			}
 		}
 	}
@@ -60,10 +60,13 @@ void Game::render() {
 }
 
 void Game::clean() {
+
 	SDL_DestroyWindow(gWindow);
 	gWindow = nullptr;
+
 	SDL_DestroyRenderer(gRenderer);
 	gRenderer = nullptr;
+
 	SDL_Quit();
 }
 
