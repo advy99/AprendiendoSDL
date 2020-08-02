@@ -1,6 +1,5 @@
-# Aprendiendo SDL
+# AprendiendoSDL
 
-En verano he decidido aprender algo de SDL utilizando C++ y siguiendo los [cursos de Lazy Foo](http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php)
+En verano he decidido aprender algo de SDL utilizando C++.
 
-
-En este repo subiré las sesiones según avance.
+Utilizar dos fuentes, el tutorial de Lazy Foo, y el libro SDL Game Development. Podéis encontrar más información de estas fuentes en el README de sus carpetas.
