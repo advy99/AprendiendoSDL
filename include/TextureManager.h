@@ -13,13 +13,14 @@ class TextureManager {
 
 		TextureManager() {};
 
+		static TextureManager * instance;
 
 	public:
 		TextureManager(const TextureManager & ) = delete;
 		void operator= (const TextureManager &) = delete;
 
-		static TextureManager & getInstance();
-		~TextureManager();
+		static TextureManager * getInstance();
+		void clean();
 
 		bool load(const std::string file, const std::string id,
 					 SDL_Renderer * g_renderer);
