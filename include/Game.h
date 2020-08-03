@@ -14,7 +14,7 @@ class Game{
 		SDL_Renderer * g_renderer;
 
 		int current_frame;
-		TextureManager g_textures;
+		TextureManager & g_textures = TextureManager::getInstance();
 
 	public:
 		Game();

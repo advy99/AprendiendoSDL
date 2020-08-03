@@ -12,6 +12,12 @@ TextureManager::~TextureManager(){
 
 }
 
+TextureManager & TextureManager::getInstance(){
+	static TextureManager instance;
+
+	return instance;
+}
+
 bool TextureManager::load(const std::string file, const std::string id,
 								  SDL_Renderer * g_renderer){
 
@@ -88,3 +94,6 @@ void TextureManager::drawFrame(const std::string id, const int X, const int Y,
 						  0, 0, FLIP);
 
 }
+
+
+std::map<std::string, SDL_Texture *> TextureManager::g_texture_map;

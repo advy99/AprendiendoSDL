@@ -9,12 +9,16 @@
 
 class TextureManager {
 	private:
-		std::map<std::string, SDL_Texture *> g_texture_map;
+		static std::map<std::string, SDL_Texture *> g_texture_map;
 
+		TextureManager() {};
 
 
 	public:
+		TextureManager(const TextureManager & ) = delete;
+		void operator= (const TextureManager &) = delete;
 
+		static TextureManager & getInstance();
 		~TextureManager();
 
 		bool load(const std::string file, const std::string id,
