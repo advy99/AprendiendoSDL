@@ -27,7 +27,6 @@ class Game{
 		static Game * instance;
 
 	public:
-		~Game();
 		static Game * getInstance();
 
 		bool init(const std::string title, const int XPOS, const int YPOS,
