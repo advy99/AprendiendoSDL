@@ -7,6 +7,9 @@ TextureManager::~TextureManager(){
 	for (auto texture : g_texture_map){
 		SDL_DestroyTexture(texture.second);
 	}
+
+	g_texture_map.clear();
+
 }
 
 bool TextureManager::load(const std::string file, const std::string id,
