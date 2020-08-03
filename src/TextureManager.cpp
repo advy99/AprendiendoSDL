@@ -2,6 +2,13 @@
 
 #include <iostream>
 
+
+TextureManager::~TextureManager(){
+	for (auto texture : g_texture_map){
+		SDL_DestroyTexture(texture.second);
+	}
+}
+
 bool TextureManager::load(const std::string file, const std::string id,
 								  SDL_Renderer * g_renderer){
 

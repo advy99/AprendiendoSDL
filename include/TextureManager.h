@@ -15,6 +15,8 @@ class TextureManager {
 
 	public:
 
+		~TextureManager();
+
 		bool load(const std::string file, const std::string id,
 					 SDL_Renderer * g_renderer);
 
