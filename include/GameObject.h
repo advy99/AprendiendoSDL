@@ -4,31 +4,23 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "TextureManager.h"
+#include "LoaderParams.h"
 #include <string>
 
 class GameObject {
 	private:
 
 	protected:
-		int x_pos;
-		int y_pos;
+		GameObject(const LoaderParams * g_params);
 
-		std::string texture_id;
-
-		int current_frame;
-		int current_row;
-
-		int width;
-		int height;
 
 	public:
-		virtual ~GameObject() = default;
-		virtual void load(const int X, const int Y, const int WIDTH, const int HEIGHT,
-					 const std::string id);
-		virtual void draw(SDL_Renderer * g_renderer);
-		virtual void update();
-		virtual void clean();
+		GameObject() {};
+		virtual void draw() = 0;
+		virtual void update() = 0;
+		virtual void clean() = 0;
 
+		virtual ~GameObject(){};
 };
 
 
