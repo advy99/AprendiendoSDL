@@ -2,14 +2,19 @@
 #define GAME_H_INCLUDED
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <string>
+#include "TextureManager.h"
 
 class Game{
 	private:
-		bool gRunning;
+		bool g_running;
 
-		SDL_Window * gWindow;
-		SDL_Renderer * gRenderer;
+		SDL_Window * g_window;
+		SDL_Renderer * g_renderer;
+
+		int current_frame;
+		TextureManager & g_textures = TextureManager::getInstance();
 
 	public:
 		Game();
