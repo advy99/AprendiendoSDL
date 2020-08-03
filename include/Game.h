@@ -18,7 +18,7 @@ class Game{
 		SDL_Renderer * g_renderer;
 
 		int current_frame;
-		TextureManager & g_textures = TextureManager::getInstance();
+		TextureManager * g_textures = TextureManager::getInstance();
 
 		std::vector<GameObject *> game_objects;
 
