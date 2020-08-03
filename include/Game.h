@@ -6,10 +6,14 @@
 
 class Game{
 	private:
-		bool gRunning;
+		bool g_running;
 
-		SDL_Window * gWindow;
-		SDL_Renderer * gRenderer;
+		SDL_Window * g_window;
+		SDL_Renderer * g_renderer;
+
+		SDL_Texture * g_texture;
+		SDL_Rect g_source_rectangle;
+		SDL_Rect g_destination_rectangle;
 
 	public:
 		Game();
