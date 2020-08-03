@@ -74,8 +74,9 @@ void Game::render() {
 	SDL_RenderClear(g_renderer);
 
 	// le pasamos lo que hemos declarado como el rectangulo de vision
-	SDL_RenderCopy(g_renderer, g_texture,
-						&g_source_rectangle, &g_destination_rectangle);
+	SDL_RenderCopyEx(g_renderer, g_texture,
+						  &g_source_rectangle, &g_destination_rectangle,
+						  0, 0, SDL_FLIP_HORIZONTAL);
 
 	// si le pasamos nulo, utilizará toda la pantalla y con toda la textura
 	//SDL_RenderCopy(g_renderer, g_texture, nullptr, nullptr);
