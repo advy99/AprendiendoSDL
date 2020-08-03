@@ -5,13 +5,13 @@ INC	   = $(HOME)/include
 SRC      = $(HOME)/src
 OBJ      = $(HOME)/obj
 
-FLAGS = -std=c++17 -Wall -Wextra -Wfloat-equal -Wpedantic
+FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
 SDL_LINK = -lSDL2 -lSDL2_image
 MENSAJE = "Compilando\ usando\ C++17,\ con\ todos\ los\ warnings\ activados"
 
 OBJETIVO = $(BIN)/main
 OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/GameObject.o $(OBJ)/Player.o \
-			 $(OBJ)/Game.o $(OBJ)/main.o
+			 $(OBJ)/Enemy.o $(OBJ)/Game.o $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -46,6 +46,9 @@ $(OBJETIVO): $(OBJETOS)
 	$(call compilar_binario,$^,$@)
 
 $(OBJ)/Player.o: $(SRC)/Player.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/Enemy.o: $(SRC)/Enemy.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/GameObject.o: $(SRC)/GameObject.cpp
