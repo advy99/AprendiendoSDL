@@ -14,3 +14,7 @@ void Player::draw(SDL_Renderer * g_renderer){
 void Player::update() {
 	x_pos -= 1;
 }
+
+void Player::clean(){
+
+}

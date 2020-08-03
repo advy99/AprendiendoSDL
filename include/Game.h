@@ -7,6 +7,7 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Player.h"
+#include <vector>
 
 class Game{
 	private:
@@ -18,8 +19,10 @@ class Game{
 		int current_frame;
 		TextureManager & g_textures = TextureManager::getInstance();
 
-		GameObject game_object;
-		Player game_player;
+		std::vector<GameObject *> game_objects;
+
+		GameObject * game_object;
+		Player * game_player;
 
 	public:
 		Game();
@@ -29,6 +32,7 @@ class Game{
 					 const int SCREEN_WIDTH, const int SCREEN_HEIGHT,
 					 const int FLAGS);
 		void render();
+		void draw();
 		void update();
 		void handleEvents();
 		void clean();

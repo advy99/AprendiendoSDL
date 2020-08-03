@@ -7,6 +7,9 @@ Game::Game(){
 	g_renderer    = nullptr;
 	g_running     = false;
 	current_frame = 0;
+
+	game_object = nullptr;
+	game_player = nullptr;
 }
 
 
@@ -43,9 +46,13 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 				SDL_SetRenderDrawColor(g_renderer, 255, 0, 0, 255);
 
 				g_textures.load("assets/animate.png", "animate", g_renderer);
-				game_object.load(100, 100, 128, 82, "animate");
-				game_player.load(300, 300, 128, 82, "animate");
+				game_object = new GameObject();
+				game_player = new Player();
+				game_object->load(100, 100, 128, 82, "animate");
+				game_player->load(300, 300, 128, 82, "animate");
 
+				game_objects.push_back(game_object);
+				game_objects.push_back(game_player);
 
 			}
 		}
@@ -67,8 +74,9 @@ void Game::render() {
 
 	//g_textures.drawFrame("animate", 100, 100, 128, 82, 1, current_frame, g_renderer);
 
-	game_object.draw(g_renderer);
-	game_player.draw(g_renderer);
+	for (unsigned i = 0; i < game_objects.size(); i++){
+		game_objects[i]->draw(g_renderer);
+	}
 
 	SDL_RenderPresent(g_renderer);
 
@@ -88,8 +96,9 @@ void Game::clean() {
 void Game::update(){
 
 	//current_frame = int( (SDL_GetTicks() / 100 ) % 6 );
-	game_object.update();
-	game_player.update();
+	for (unsigned i = 0; i < game_objects.size(); i++){
+		game_objects[i]->update();
+	}
 }
 
 void Game::handleEvents() {
