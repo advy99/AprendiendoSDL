@@ -10,7 +10,8 @@ SDL_LINK = -lSDL2 -lSDL2_image
 MENSAJE = "Compilando\ usando\ C++17,\ con\ todos\ los\ warnings\ activados"
 
 OBJETIVO = $(BIN)/main
-OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/Game.o $(OBJ)/main.o
+OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/GameObject.o $(OBJ)/Player.o \
+			 $(OBJ)/Game.o $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -44,6 +45,11 @@ INICIO:
 $(OBJETIVO): $(OBJETOS)
 	$(call compilar_binario,$^,$@)
 
+$(OBJ)/Player.o: $(SRC)/Player.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/GameObject.o: $(SRC)/GameObject.cpp
+	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/TextureManager.o: $(SRC)/TextureManager.cpp
 	$(call compilar_objeto,$^,$@)
