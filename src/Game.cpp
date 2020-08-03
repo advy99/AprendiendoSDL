@@ -42,20 +42,20 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 			} else {
 				SDL_SetRenderDrawColor(g_renderer, 255, 255, 255, 255);
 
-				SDL_Surface * asset_surface = SDL_LoadBMP("assets/rider.bmp");
+				SDL_Surface * asset_surface = SDL_LoadBMP("assets/animate.bmp");
 
 				g_texture = SDL_CreateTextureFromSurface(g_renderer, asset_surface);
 
 				SDL_FreeSurface(asset_surface);
 
-
-				SDL_QueryTexture(g_texture, nullptr, nullptr, &g_source_rectangle.w,
-									  &g_source_rectangle.h);
+				// para la animacion no es necesario
+				//SDL_QueryTexture(g_texture, nullptr, nullptr, &g_source_rectangle.w,
+				//					  &g_source_rectangle.h);
 
 				g_destination_rectangle.x = g_source_rectangle.x = 0;
 				g_destination_rectangle.y = g_source_rectangle.y = 0;
-				g_destination_rectangle.w = g_source_rectangle.w;
-				g_destination_rectangle.h = g_source_rectangle.h;
+				g_destination_rectangle.w = g_source_rectangle.w = 128;
+				g_destination_rectangle.h = g_source_rectangle.h = 82;
 
 			}
 		}
@@ -74,11 +74,11 @@ void Game::render() {
 	SDL_RenderClear(g_renderer);
 
 	// le pasamos lo que hemos declarado como el rectangulo de vision
-	//SDL_RenderCopy(g_renderer, g_texture,
-	//					&g_source_rectangle, &g_destination_rectangle);
+	SDL_RenderCopy(g_renderer, g_texture,
+						&g_source_rectangle, &g_destination_rectangle);
 
 	// si le pasamos nulo, utilizará toda la pantalla y con toda la textura
-	SDL_RenderCopy(g_renderer, g_texture, nullptr, nullptr);
+	//SDL_RenderCopy(g_renderer, g_texture, nullptr, nullptr);
 
 	SDL_RenderPresent(g_renderer);
 
@@ -97,6 +97,7 @@ void Game::clean() {
 
 void Game::update(){
 
+	g_source_rectangle.x = 128 * int( (SDL_GetTicks() /100 ) % 6 );
 }
 
 void Game::handleEvents() {
