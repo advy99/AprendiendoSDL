@@ -2,11 +2,11 @@
 #include "Game.h"
 
 
-int main(int argc, char ** argv) {
+int main() {
 
 	Game * myGame;
 
-	myGame = new Game();
+	myGame = Game::getInstance();
 
 	myGame->init("Capitulo 1", 100, 100, 640, 480, 0);
 
@@ -14,6 +14,7 @@ int main(int argc, char ** argv) {
 		myGame->handleEvents();
 		myGame->update();
 		myGame->render();
+		SDL_Delay(10);
 	}
 
 	myGame->clean();

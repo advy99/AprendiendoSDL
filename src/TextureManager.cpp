@@ -3,17 +3,23 @@
 #include <iostream>
 
 
-TextureManager::~TextureManager(){
+void TextureManager::clean(){
 	for (auto texture : g_texture_map){
 		SDL_DestroyTexture(texture.second);
 	}
 
 	g_texture_map.clear();
 
+	if (instance != nullptr){
+		delete instance;
+	}
+	instance = nullptr;
 }
 
-TextureManager & TextureManager::getInstance(){
-	static TextureManager instance;
+TextureManager * TextureManager::getInstance(){
+	if (instance == nullptr){
+		instance = new TextureManager();
+	}
 
 	return instance;
 }
@@ -95,5 +101,5 @@ void TextureManager::drawFrame(const std::string id, const int X, const int Y,
 
 }
 
-
+TextureManager * TextureManager::instance = nullptr;
 std::map<std::string, SDL_Texture *> TextureManager::g_texture_map;

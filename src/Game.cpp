@@ -7,11 +7,21 @@ Game::Game(){
 	g_renderer    = nullptr;
 	g_running     = false;
 	current_frame = 0;
+
 }
 
 
-Game::~Game() {
-	clean();
+// lo llamamos manualmente al ser singleton
+//Game::~Game() {
+//	clean();
+//}
+
+Game * Game::getInstance(){
+	if (instance == nullptr){
+		instance = new Game();
+	}
+
+	return instance;
 }
 
 bool Game::init(const std::string title, const int XPOS, const int YPOS,
@@ -42,7 +52,16 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 			} else {
 				SDL_SetRenderDrawColor(g_renderer, 255, 0, 0, 255);
 
-				g_textures.load("assets/animate.png", "animate", g_renderer);
+				g_textures->load("assets/animate.png", "animate", g_renderer);
+
+				Player * game_player = new Player(new LoaderParams(300, 300,
+																					128, 82,
+																				  	"animate"));
+				Enemy * game_enemy = new Enemy(new LoaderParams(0, 0, 128, 82,
+																			   "animate"));
+
+				game_objects.push_back(game_player);
+				game_objects.push_back(game_enemy);
 
 			}
 		}
@@ -60,9 +79,13 @@ void Game::render() {
 
 	SDL_RenderClear(g_renderer);
 
-	g_textures.draw("animate", 0, 0, 128, 82, g_renderer);
+	//g_textures.draw("animate", 0, 0, 128, 82, g_renderer);
 
-	g_textures.drawFrame("animate", 100, 100, 128, 82, 1, current_frame, g_renderer);
+	//g_textures.drawFrame("animate", 100, 100, 128, 82, 1, current_frame, g_renderer);
+
+	for (unsigned i = 0; i < game_objects.size(); i++){
+		game_objects[i]->draw();
+	}
 
 	SDL_RenderPresent(g_renderer);
 
@@ -77,11 +100,28 @@ void Game::clean() {
 	g_renderer = nullptr;
 
 	SDL_Quit();
+
+	for (unsigned i = 0; i < game_objects.size(); i++){
+		delete game_objects[i];
+	}
+	game_objects.clear();
+
+	g_textures->clean();
+	g_textures = nullptr;
+
+	if (instance != nullptr){
+		delete instance;
+	}
+
+	instance = nullptr;
 }
 
 void Game::update(){
 
-	current_frame = int( (SDL_GetTicks() / 100 ) % 6 );
+	//current_frame = int( (SDL_GetTicks() / 100 ) % 6 );
+	for (unsigned i = 0; i < game_objects.size(); i++){
+		game_objects[i]->update();
+	}
 }
 
 void Game::handleEvents() {
@@ -100,3 +140,9 @@ void Game::handleEvents() {
 bool Game::running() const {
 	return g_running;
 }
+
+SDL_Renderer * Game::getRenderer() const {
+	return g_renderer;
+}
+
+Game * Game::instance = nullptr;
