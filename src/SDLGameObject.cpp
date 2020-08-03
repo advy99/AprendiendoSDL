@@ -21,3 +21,11 @@ void SDLGameObject::draw(){
 														  current_row, current_frame,
 														  Game::getInstance()->getRenderer());
 }
+
+void SDLGameObject::update() {
+
+}
+
+void SDLGameObject::clean() {
+
+}
