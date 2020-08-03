@@ -11,8 +11,17 @@ Game::Game(){
 }
 
 
-Game::~Game() {
-	clean();
+// lo llamamos manualmente al ser singleton
+//Game::~Game() {
+//	clean();
+//}
+
+Game * Game::getInstance(){
+	if (instance == nullptr){
+		instance = new Game();
+	}
+
+	return instance;
 }
 
 bool Game::init(const std::string title, const int XPOS, const int YPOS,
@@ -98,6 +107,10 @@ void Game::clean() {
 		delete game_objects[i];
 	}
 	game_objects.clear();
+
+	if (instance != nullptr){
+		delete instance;
+	}
 }
 
 void Game::update(){
@@ -124,3 +137,9 @@ void Game::handleEvents() {
 bool Game::running() const {
 	return g_running;
 }
+
+SDL_Renderer * Game::getRenderer() const {
+	return g_renderer;
+}
+
+Game * Game::instance = nullptr;

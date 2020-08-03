@@ -22,10 +22,13 @@ class Game{
 
 		std::vector<GameObject *> game_objects;
 
+		Game();
+
+		static Game * instance;
 
 	public:
-		Game();
 		~Game();
+		static Game * getInstance();
 
 		bool init(const std::string title, const int XPOS, const int YPOS,
 					 const int SCREEN_WIDTH, const int SCREEN_HEIGHT,
@@ -37,6 +40,8 @@ class Game{
 		void clean();
 
 		bool running() const;
+
+		SDL_Renderer * getRenderer() const;
 
 
 };
