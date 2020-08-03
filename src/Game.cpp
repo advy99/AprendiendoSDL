@@ -91,6 +91,11 @@ void Game::clean() {
 	g_renderer = nullptr;
 
 	SDL_Quit();
+
+	for (unsigned i = 0; i < game_objects.size(); i++){
+		delete game_objects[i];
+	}
+	game_objects.clear();
 }
 
 void Game::update(){

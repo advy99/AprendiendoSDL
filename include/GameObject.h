@@ -22,6 +22,7 @@ class GameObject {
 		int height;
 
 	public:
+		virtual ~GameObject() = default;
 		virtual void load(const int X, const int Y, const int WIDTH, const int HEIGHT,
 					 const std::string id);
 		virtual void draw(SDL_Renderer * g_renderer);
