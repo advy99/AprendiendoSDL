@@ -8,8 +8,6 @@ Game::Game(){
 	g_running     = false;
 	current_frame = 0;
 
-	game_object = nullptr;
-	game_player = nullptr;
 }
 
 
@@ -46,13 +44,17 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 				SDL_SetRenderDrawColor(g_renderer, 255, 0, 0, 255);
 
 				g_textures.load("assets/animate.png", "animate", g_renderer);
-				game_object = new GameObject();
-				game_player = new Player();
+				GameObject * game_object = new GameObject();
+				Player * game_player = new Player();
+				Enemy * game_enemy = new Enemy();
+
 				game_object->load(100, 100, 128, 82, "animate");
 				game_player->load(300, 300, 128, 82, "animate");
+				game_enemy->load(0, 0, 128, 82, "animate");
 
 				game_objects.push_back(game_object);
 				game_objects.push_back(game_player);
+				game_objects.push_back(game_enemy);
 
 			}
 		}

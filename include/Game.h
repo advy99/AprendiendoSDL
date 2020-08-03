@@ -7,6 +7,7 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Player.h"
+#include "Enemy.h"
 #include <vector>
 
 class Game{
@@ -21,8 +22,6 @@ class Game{
 
 		std::vector<GameObject *> game_objects;
 
-		GameObject * game_object;
-		Player * game_player;
 
 	public:
 		Game();
