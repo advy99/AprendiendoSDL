@@ -106,9 +106,14 @@ void Game::clean() {
 	}
 	game_objects.clear();
 
+	g_textures->clean();
+	g_textures = nullptr;
+
 	if (instance != nullptr){
 		delete instance;
 	}
+
+	instance = nullptr;
 }
 
 void Game::update(){
