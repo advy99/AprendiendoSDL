@@ -54,7 +54,7 @@ void TextureManager::draw(const std::string id, const int X, const int Y,
 
 	source_rect.x = 0;
 	source_rect.y = 0;
-	source_rect.w = dest_rect.h = WIDTH;
+	source_rect.w = dest_rect.w = WIDTH;
 	source_rect.h = dest_rect.h = HEIGHT;
 
 	dest_rect.x = X;
@@ -77,7 +77,7 @@ void TextureManager::drawFrame(const std::string id, const int X, const int Y,
 
 	source_rect.x = WIDTH * CURRENT_FRAME;
 	source_rect.y = HEIGHT * (CURRENT_ROW - 1);
-	source_rect.w = dest_rect.h = WIDTH;
+	source_rect.w = dest_rect.w = WIDTH;
 	source_rect.h = dest_rect.h = HEIGHT;
 
 	dest_rect.x = X;

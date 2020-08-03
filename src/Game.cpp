@@ -3,9 +3,10 @@
 
 
 Game::Game(){
-	g_window   = nullptr;
-	g_renderer = nullptr;
-	g_running  = false;
+	g_window      = nullptr;
+	g_renderer    = nullptr;
+	g_running     = false;
+	current_frame = 0;
 }
 
 
@@ -80,7 +81,7 @@ void Game::clean() {
 
 void Game::update(){
 
-	current_frame = int( (SDL_GetTicks() /100 ) % 6 );
+	current_frame = int( (SDL_GetTicks() / 100 ) % 6 );
 }
 
 void Game::handleEvents() {
