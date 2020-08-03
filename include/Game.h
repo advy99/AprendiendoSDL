@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
+#include "TextureManager.h"
 
 class Game{
 	private:
@@ -12,9 +13,8 @@ class Game{
 		SDL_Window * g_window;
 		SDL_Renderer * g_renderer;
 
-		SDL_Texture * g_texture;
-		SDL_Rect g_source_rectangle;
-		SDL_Rect g_destination_rectangle;
+		int current_frame;
+		TextureManager g_textures;
 
 	public:
 		Game();
