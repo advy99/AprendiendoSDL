@@ -10,6 +10,10 @@ void TextureManager::clean(){
 
 	g_texture_map.clear();
 
+	if (instance != nullptr){
+		delete instance;
+	}
+	instance = nullptr;
 }
 
 TextureManager * TextureManager::getInstance(){
