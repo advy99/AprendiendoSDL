@@ -6,7 +6,7 @@ int main() {
 
 	Game * myGame;
 
-	myGame = new Game();
+	myGame = Game::getInstance();
 
 	myGame->init("Capitulo 1", 100, 100, 640, 480, 0);
 
