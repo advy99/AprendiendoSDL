@@ -40,9 +40,9 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 							 << SDL_GetError() << "." << std::endl;
 				success = false;
 			} else {
-				SDL_SetRenderDrawColor(g_renderer, 255, 255, 255, 255);
+				SDL_SetRenderDrawColor(g_renderer, 255, 0, 0, 255);
 
-				SDL_Surface * asset_surface = SDL_LoadBMP("assets/animate.bmp");
+				SDL_Surface * asset_surface = IMG_Load("assets/animate.png");
 
 				g_texture = SDL_CreateTextureFromSurface(g_renderer, asset_surface);
 
@@ -76,7 +76,7 @@ void Game::render() {
 	// le pasamos lo que hemos declarado como el rectangulo de vision
 	SDL_RenderCopyEx(g_renderer, g_texture,
 						  &g_source_rectangle, &g_destination_rectangle,
-						  0, 0, SDL_FLIP_HORIZONTAL);
+						  0, 0, SDL_FLIP_NONE);
 
 	// si le pasamos nulo, utilizará toda la pantalla y con toda la textura
 	//SDL_RenderCopy(g_renderer, g_texture, nullptr, nullptr);

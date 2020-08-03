@@ -5,7 +5,8 @@ INC	   = $(HOME)/include
 SRC      = $(HOME)/src
 OBJ      = $(HOME)/obj
 
-FLAGS = -std=c++17 -Wall -Wextra -Wfloat-equal -Wpedantic -lSDL2
+FLAGS = -std=c++17 -Wall -Wextra -Wfloat-equal -Wpedantic
+SDL_LINK = -lSDL2 -lSDL2_image
 MENSAJE = "Compilando\ usando\ C++17,\ con\ todos\ los\ warnings\ activados"
 
 OBJETIVO = $(BIN)/main
@@ -21,13 +22,13 @@ all: clean INICIO $(OBJETIVO) FIN
 define compilar_objeto
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $(2) a partir de $(1)\n"
-	@$(CXX) -c $(FLAGS) $(1) -I$(INC) -o $(2)
+	@$(CXX) -c $(FLAGS) $(SDL_LINK) $(1) -I$(INC) -o $(2)
 endef
 
 define compilar_binario
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(2) a partir de $(1)\n"
-	@$(CXX) $(1) -o $(2) -lSDL2
+	@$(CXX) $(1) -o $(2) $(SDL_LINK)
 	@printf "\n\e[36mCompilación de $(BIN)/GA_P finalizada con exito.\n\n"
 endef
 
