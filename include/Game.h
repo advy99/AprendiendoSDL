@@ -5,6 +5,8 @@
 #include <SDL2/SDL_image.h>
 #include <string>
 #include "TextureManager.h"
+#include "GameObject.h"
+#include "Player.h"
 
 class Game{
 	private:
@@ -15,6 +17,9 @@ class Game{
 
 		int current_frame;
 		TextureManager & g_textures = TextureManager::getInstance();
+
+		GameObject game_object;
+		Player game_player;
 
 	public:
 		Game();
