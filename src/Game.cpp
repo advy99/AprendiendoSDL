@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <iostream>
+#include "InputHandler.h"
 
 
 Game::Game(){
@@ -11,6 +12,9 @@ Game::Game(){
 }
 
 
+void Game::quit(){
+	g_running = false;
+}
 // lo llamamos manualmente al ser singleton
 //Game::~Game() {
 //	clean();
@@ -63,6 +67,8 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 				game_objects.push_back(game_player);
 				game_objects.push_back(game_enemy);
 
+				InputHandler::getInstance()->initialiseJoysticks();
+
 			}
 		}
 	}
@@ -93,10 +99,12 @@ void Game::render() {
 
 void Game::clean() {
 
-	SDL_DestroyWindow(g_window);
+	if ( g_window != nullptr )
+		SDL_DestroyWindow(g_window);
 	g_window = nullptr;
 
-	SDL_DestroyRenderer(g_renderer);
+	if (g_renderer != nullptr)
+		SDL_DestroyRenderer(g_renderer);
 	g_renderer = nullptr;
 
 	SDL_Quit();
@@ -106,8 +114,11 @@ void Game::clean() {
 	}
 	game_objects.clear();
 
-	g_textures->clean();
+	if (g_textures != nullptr)
+		g_textures->clean();
 	g_textures = nullptr;
+
+	InputHandler::getInstance()->clean();
 
 	if (instance != nullptr){
 		delete instance;
