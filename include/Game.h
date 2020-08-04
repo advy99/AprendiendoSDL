@@ -41,6 +41,7 @@ class Game{
 		bool running() const;
 
 		SDL_Renderer * getRenderer() const;
+		void quit();
 
 
 };

@@ -4,6 +4,7 @@
 #include <string>
 #include "GameObject.h"
 #include "LoaderParams.h"
+#include "Vector2D.h"
 
 #include "SDL2/SDL.h"
 
@@ -11,8 +12,9 @@ class SDLGameObject : public GameObject{
 	private:
 
 	protected:
-		int x_pos;
-		int y_pos;
+		Vector2D position;
+		Vector2D velocity;
+		Vector2D acceleration;
 
 		int current_frame;
 		int current_row;
