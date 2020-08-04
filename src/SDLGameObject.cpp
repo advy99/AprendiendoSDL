@@ -4,7 +4,7 @@
 
 SDLGameObject::SDLGameObject(const LoaderParams * params)
 									 :position(params->getX(), params->getY()),
-									  velocity(0,0){
+									  velocity(0,0), acceleration(0,0){
 
 	width = params->getWidth();
 	height = params->getHeight();
@@ -23,6 +23,7 @@ void SDLGameObject::draw(){
 }
 
 void SDLGameObject::update() {
+	velocity += acceleration;
 	position += velocity;
 }
 

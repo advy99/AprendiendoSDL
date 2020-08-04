@@ -14,6 +14,7 @@ class SDLGameObject : public GameObject{
 	protected:
 		Vector2D position;
 		Vector2D velocity;
+		Vector2D acceleration;
 
 		int current_frame;
 		int current_row;
