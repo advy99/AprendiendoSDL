@@ -12,7 +12,7 @@ MENSAJE = "Compilando\ usando\ C++17,\ con\ todos\ los\ warnings\ activados"
 OBJETIVO = $(BIN)/main
 OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/LoaderParams.o $(OBJ)/SDLGameObject.o \
 			 $(OBJ)/Player.o $(OBJ)/Vector2D.o $(OBJ)/Enemy.o \
-			 $(OBJ)/Game.o $(OBJ)/main.o
+			 $(OBJ)/InputHandler.o $(OBJ)/Game.o $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -62,6 +62,9 @@ $(OBJ)/TextureManager.o: $(SRC)/TextureManager.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/Vector2D.o: $(SRC)/Vector2D.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/InputHandler.o: $(SRC)/InputHandler.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/Game.o: $(SRC)/Game.cpp

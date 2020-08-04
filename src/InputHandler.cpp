@@ -1,5 +1,6 @@
 #include "InputHandler.h"
 #include <iostream>
+#include "Game.h"
 
 InputHandler::InputHandler() {
 	joysticks_initialised = false;
