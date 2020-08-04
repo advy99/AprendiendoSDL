@@ -11,7 +11,8 @@ void Enemy::draw(){
 }
 
 void Enemy::update() {
-	x_pos -= 1;
+	position.setX(position.getX() + 1);
+	position.setY(position.getY() + 1);
 	current_frame = int( (SDL_GetTicks() / 100) % 6  );
 }
 
