@@ -3,7 +3,8 @@
 #include "TextureManager.h"
 
 SDLGameObject::SDLGameObject(const LoaderParams * params)
-									 :position(params->getX(), params->getY()){
+									 :position(params->getX(), params->getY()),
+									  velocity(0,0){
 
 	width = params->getWidth();
 	height = params->getHeight();
@@ -22,7 +23,7 @@ void SDLGameObject::draw(){
 }
 
 void SDLGameObject::update() {
-
+	position += velocity;
 }
 
 void SDLGameObject::clean() {
