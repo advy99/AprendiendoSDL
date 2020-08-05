@@ -52,4 +52,10 @@ void Player::handleInput() {
 		}
 
 	}
+
+
+	if ( input_handler->getMouseButtonState(LEFT) ) {
+		velocity.setX(1);
+	}
+
 }
