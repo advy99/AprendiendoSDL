@@ -74,7 +74,15 @@ void InputHandler::update(){
 			}
 
 
+		} else if ( event.type == SDL_JOYBUTTONDOWN ) {
+			button_states[event.jaxis.which][event.jbutton.button] = true;
+
+		} else if ( event.type == SDL_JOYBUTTONUP ) {
+			button_states[event.jaxis.which][event.jbutton.button] = false;
 		}
+
+
+
 	}
 }
 
@@ -119,6 +127,13 @@ void InputHandler::initialiseJoysticks(){
 			Vector2D * stick2 = new Vector2D(0,0);
 
 			joystick_values.push_back(std::make_pair(stick1, stick2));
+
+			std::vector<bool> tmp_buttons =
+									std::vector<bool>(SDL_JoystickNumButtons(joy), false);
+
+			button_states.push_back(tmp_buttons);
+
+
 		} else {
 			std::cerr << SDL_GetError() << std::endl;
 		}
@@ -165,6 +180,10 @@ int InputHandler::yValue(const int joy, const int stick) const{
 	return valor;
 }
 
+
+bool InputHandler::getButtonState(const int joy, const int button_number)const{
+	return button_states[joy][button_number];
+}
 
 
 InputHandler * InputHandler::instance = nullptr;
