@@ -8,6 +8,8 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "PlayState.h"
+#include "MenuState.h"
 #include "GameStateMachine.h"
 #include <vector>
 
