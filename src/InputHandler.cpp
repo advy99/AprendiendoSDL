@@ -38,70 +38,22 @@ void InputHandler::update(){
 		if (event.type == SDL_QUIT){
 			Game::getInstance()->quit();
 		} else if ( event.type == SDL_JOYAXISMOTION ) {
-			int which_one = event.jaxis.which;
-
-			if ( event.jaxis.axis == 0 ) {
-				if ( event.jaxis.value > joystick_dead_zone ){
-					joystick_values[which_one].first->setX(1);
-				} else if ( event.jaxis.value < -joystick_dead_zone ){
-					joystick_values[which_one].first->setX(-1);
-				} else {
-					joystick_values[which_one].first->setX(0);
-				}
-			}
-
-			if ( event.jaxis.axis == 1 ) {
-				if ( event.jaxis.value > joystick_dead_zone ){
-					joystick_values[which_one].first->setY(1);
-				} else if ( event.jaxis.value < -joystick_dead_zone ){
-					joystick_values[which_one].first->setY(-1);
-				} else {
-					joystick_values[which_one].first->setY(0);
-				}
-			}
-
-
-			if ( event.jaxis.axis == 3 ) {
-				if ( event.jaxis.value > joystick_dead_zone ){
-					joystick_values[which_one].second->setX(1);
-				} else if ( event.jaxis.value < -joystick_dead_zone ){
-					joystick_values[which_one].second->setX(-1);
-				} else {
-					joystick_values[which_one].second->setX(0);
-				}
-			}
-
-			if ( event.jaxis.axis == 4 ) {
-				if ( event.jaxis.value > joystick_dead_zone ){
-					joystick_values[which_one].second->setY(1);
-				} else if ( event.jaxis.value < -joystick_dead_zone ){
-					joystick_values[which_one].second->setY(-1);
-				} else {
-					joystick_values[which_one].second->setY(0);
-				}
-			}
-
+			onJoystickAxisMove(event);
 
 		} else if ( event.type == SDL_JOYBUTTONDOWN ) {
-			button_states[event.jaxis.which][event.jbutton.button] = true;
+			onJoystickButtonDown(event);
 
 		} else if ( event.type == SDL_JOYBUTTONUP ) {
-			button_states[event.jaxis.which][event.jbutton.button] = false;
+			onJoystickButtonUp(event);
 
 		} else if ( event.type == SDL_MOUSEBUTTONDOWN ) {
-			// El izquierdo es 1, central 2 y derecha 3
-			// por lo que le restamos 1 para tener 0, 1 y 2
-			mouse_button_states[event.button.button - 1] = true;
+			onMouseButtonDown(event);
 
 		} else if ( event.type == SDL_MOUSEBUTTONUP ) {
-			// El izquierdo es 1, central 2 y derecha 3
-			// por lo que le restamos 1 para tener 0, 1 y 2
-			mouse_button_states[event.button.button - 1] = false;
+			onMouseButtonDown(event);
 
 		} else if ( event.type == SDL_MOUSEMOTION ) {
-			mouse_position->setX(event.motion.x);
-			mouse_position->setY(event.motion.y);
-
+			onMouseMotion(event);
 
 		}
 
@@ -110,6 +62,39 @@ void InputHandler::update(){
 
 	}
 }
+
+void InputHandler::onJoystickButtonDown(const SDL_Event event){
+	button_states[event.jaxis.which][event.jbutton.button] = true;
+}
+
+void InputHandler::onJoystickButtonUp(const SDL_Event event) {
+	button_states[event.jaxis.which][event.jbutton.button] = false;
+}
+
+void InputHandler::onMouseButtonDown(const SDL_Event event) {
+
+	// El izquierdo es 1, central 2 y derecha 3
+	// por lo que le restamos 1 para tener 0, 1 y 2
+	mouse_button_states[event.button.button - 1] = true;
+
+}
+
+
+void InputHandler::onMouseButtonUp(const SDL_Event event) {
+
+	// El izquierdo es 1, central 2 y derecha 3
+	// por lo que le restamos 1 para tener 0, 1 y 2
+	mouse_button_states[event.button.button - 1] = false;
+
+}
+
+void InputHandler::onMouseMotion( const SDL_Event event ) {
+
+	mouse_position->setX(event.motion.x);
+	mouse_position->setY(event.motion.y);
+}
+
+
 
 void InputHandler::clean(){
 
@@ -237,5 +222,51 @@ bool InputHandler::isKeyDown(const SDL_Scancode key) const {
 
 }
 
+void InputHandler::onJoystickAxisMove(const SDL_Event event){
+
+	int which_one = event.jaxis.which;
+
+	if ( event.jaxis.axis == 0 ) {
+		if ( event.jaxis.value > joystick_dead_zone ){
+			joystick_values[which_one].first->setX(1);
+		} else if ( event.jaxis.value < -joystick_dead_zone ){
+			joystick_values[which_one].first->setX(-1);
+		} else {
+			joystick_values[which_one].first->setX(0);
+		}
+	}
+
+	if ( event.jaxis.axis == 1 ) {
+		if ( event.jaxis.value > joystick_dead_zone ){
+			joystick_values[which_one].first->setY(1);
+		} else if ( event.jaxis.value < -joystick_dead_zone ){
+			joystick_values[which_one].first->setY(-1);
+		} else {
+			joystick_values[which_one].first->setY(0);
+		}
+	}
+
+
+	if ( event.jaxis.axis == 3 ) {
+		if ( event.jaxis.value > joystick_dead_zone ){
+			joystick_values[which_one].second->setX(1);
+		} else if ( event.jaxis.value < -joystick_dead_zone ){
+			joystick_values[which_one].second->setX(-1);
+		} else {
+			joystick_values[which_one].second->setX(0);
+		}
+	}
+
+	if ( event.jaxis.axis == 4 ) {
+		if ( event.jaxis.value > joystick_dead_zone ){
+			joystick_values[which_one].second->setY(1);
+		} else if ( event.jaxis.value < -joystick_dead_zone ){
+			joystick_values[which_one].second->setY(-1);
+		} else {
+			joystick_values[which_one].second->setY(0);
+		}
+	}
+
+}
 
 InputHandler * InputHandler::instance = nullptr;

@@ -23,6 +23,14 @@ class InputHandler {
 		Vector2D * mouse_position;
 		Uint8 * key_state;
 
+		void onJoystickAxisMove(const SDL_Event event);
+		void onJoystickButtonDown(const SDL_Event event);
+		void onJoystickButtonUp( const SDL_Event event );
+		void onMouseButtonDown( const SDL_Event event );
+		void onMouseButtonUp( const SDL_Event event );
+		void onMouseMotion ( const SDL_Event event );
+
+
 
 		InputHandler();
 		~InputHandler();
