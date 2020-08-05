@@ -60,6 +60,6 @@ void Player::handleInput() {
 
 	Vector2D * vec = InputHandler::getInstance()->getMousePosition();
 
-	velocity = ((*vec) - position) / 100;
+	velocity = ((*vec) - position) / 10;
 
 }
