@@ -8,6 +8,7 @@ InputHandler::InputHandler() {
 	mouse_button_states = std::vector<bool>(3, false);
 
 	mouse_position = new Vector2D(0, 0);
+	key_state = nullptr;
 }
 
 InputHandler::~InputHandler(){
@@ -31,6 +32,9 @@ void InputHandler::update(){
 	SDL_Event event;
 
 	while ( SDL_PollEvent(&event) ){
+
+		key_state = const_cast <Uint8*> ( SDL_GetKeyboardState( nullptr ) );
+
 		if (event.type == SDL_QUIT){
 			Game::getInstance()->quit();
 		} else if ( event.type == SDL_JOYAXISMOTION ) {
@@ -126,6 +130,8 @@ void InputHandler::clean(){
 	}
 	mouse_position = nullptr;
 
+
+
 	joysticks_initialised = false;
 
 	if (instance != nullptr){
@@ -219,6 +225,17 @@ Vector2D * InputHandler::getMousePosition() const {
 	return mouse_position;
 }
 
+bool InputHandler::isKeyDown(const SDL_Scancode key) const {
+	bool is_down = false;
+
+	if (key_state != nullptr){
+		is_down = key_state[key] == 1;
+	}
+
+	return is_down;
+
+
+}
 
 
 InputHandler * InputHandler::instance = nullptr;

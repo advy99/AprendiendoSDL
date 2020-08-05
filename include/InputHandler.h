@@ -21,6 +21,7 @@ class InputHandler {
 		std::vector<bool> mouse_button_states;
 
 		Vector2D * mouse_position;
+		Uint8 * key_state;
 
 
 		InputHandler();
@@ -44,6 +45,7 @@ class InputHandler {
 		bool getMouseButtonState(const int button) const;
 
 		Vector2D * getMousePosition() const;
+		bool isKeyDown(const SDL_Scancode key) const;
 
 };
 
