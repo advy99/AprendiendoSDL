@@ -58,8 +58,27 @@ void Player::handleInput() {
 	//	velocity.setX(1);
 	//}
 
-	Vector2D * vec = InputHandler::getInstance()->getMousePosition();
+	//Vector2D * vec = InputHandler::getInstance()->getMousePosition();
 
-	velocity = ((*vec) - position) / 10;
+	//velocity = ((*vec) - position) / 10;
 
+	if ( InputHandler::getInstance()->isKeyDown(SDL_SCANCODE_RIGHT) ) {
+		velocity.setX(2);
+
+	}
+
+	if ( InputHandler::getInstance()->isKeyDown(SDL_SCANCODE_LEFT) ) {
+		velocity.setX(-2);
+
+	}
+
+	if ( InputHandler::getInstance()->isKeyDown(SDL_SCANCODE_UP) ) {
+		velocity.setY(-2);
+
+	}
+
+	if ( InputHandler::getInstance()->isKeyDown(SDL_SCANCODE_DOWN) ) {
+		velocity.setY(2);
+
+	}
 }
