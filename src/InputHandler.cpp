@@ -18,6 +18,11 @@ InputHandler * InputHandler::getInstance() {
 	return instance;
 }
 
+bool InputHandler::joysticksInitialised() const {
+	return joysticks_initialised;
+}
+
+
 void InputHandler::update(){
 	SDL_Event event;
 
