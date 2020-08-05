@@ -136,16 +136,7 @@ void Game::update(){
 }
 
 void Game::handleEvents() {
-	SDL_Event event;
-
-	if ( SDL_PollEvent(&event) ){
-		switch (event.type){
-			case SDL_QUIT:
-				g_running = false;
-				break;
-
-		}
-	}
+	InputHandler::getInstance()->update();
 }
 
 bool Game::running() const {
