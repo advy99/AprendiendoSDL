@@ -6,6 +6,8 @@ InputHandler::InputHandler() {
 	joysticks_initialised = false;
 
 	mouse_button_states = std::vector<bool>(3, false);
+
+	mouse_position = new Vector2D(0, 0);
 }
 
 InputHandler::~InputHandler(){
@@ -91,6 +93,12 @@ void InputHandler::update(){
 			// El izquierdo es 1, central 2 y derecha 3
 			// por lo que le restamos 1 para tener 0, 1 y 2
 			mouse_button_states[event.button.button - 1] = false;
+
+		} else if ( event.type == SDL_MOUSEMOTION ) {
+			mouse_position->setX(event.motion.x);
+			mouse_position->setY(event.motion.y);
+
+
 		}
 
 
@@ -112,6 +120,11 @@ void InputHandler::clean(){
 		delete sticks.second;
 		joystick_values.pop_back();
 	}
+
+	if (mouse_position != nullptr){
+		delete mouse_position;
+	}
+	mouse_position = nullptr;
 
 	joysticks_initialised = false;
 
@@ -201,5 +214,11 @@ bool InputHandler::getButtonState(const int joy, const int button_number)const{
 bool InputHandler::getMouseButtonState(const int button) const {
 	return mouse_button_states[button];
 }
+
+Vector2D * InputHandler::getMousePosition() const {
+	return mouse_position;
+}
+
+
 
 InputHandler * InputHandler::instance = nullptr;

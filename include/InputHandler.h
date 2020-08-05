@@ -20,6 +20,8 @@ class InputHandler {
 
 		std::vector<bool> mouse_button_states;
 
+		Vector2D * mouse_position;
+
 
 		InputHandler();
 		~InputHandler();
@@ -40,6 +42,8 @@ class InputHandler {
 		int yValue(const int joy, const int stick) const;
 		bool getButtonState(const int joy, const int button_number) const;
 		bool getMouseButtonState(const int button) const;
+
+		Vector2D * getMousePosition() const;
 
 };
 
