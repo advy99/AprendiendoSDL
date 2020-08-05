@@ -1,6 +1,10 @@
 #include "MenuState.h"
 #include <iostream>
 
+MenuState::~MenuState() {
+
+}
+
 void MenuState::update(){
 
 }

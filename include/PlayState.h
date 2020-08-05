@@ -8,6 +8,7 @@ class PlayState : public GameState {
 		static const std::string play_id;
 
 	public:
+		virtual ~PlayState() = default;
 		virtual void update();
 		virtual void render();
 

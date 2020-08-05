@@ -8,6 +8,7 @@ class MenuState : public GameState {
 		static const std::string menu_id;
 
 	public:
+		~MenuState();
 		virtual void update();
 		virtual void render();
 

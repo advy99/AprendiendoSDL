@@ -1,5 +1,12 @@
 #include "GameStateMachine.h"
 
+
+GameStateMachine::~GameStateMachine() {
+	while ( !game_states.empty() ) {
+		popState();
+	}
+}
+
 void GameStateMachine::pushState(GameState * state) {
 	game_states.push(state);
 	game_states.top()->onEnter();
