@@ -4,11 +4,11 @@
 
 
 Game::Game(){
-	g_window      = nullptr;
-	g_renderer    = nullptr;
-	g_running     = false;
-	current_frame = 0;
-
+	g_window           = nullptr;
+	g_renderer         = nullptr;
+	g_running          = false;
+	current_frame      = 0;
+	game_state_machine = nullptr;
 }
 
 
@@ -69,6 +69,9 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 
 				InputHandler::getInstance()->initialiseJoysticks();
 
+				game_state_machine = new GameStateMachine();
+				game_state_machine->changeState(new MenuState());
+
 			}
 		}
 	}
@@ -119,6 +122,12 @@ void Game::clean() {
 	g_textures = nullptr;
 
 	InputHandler::getInstance()->clean();
+
+	if (game_state_machine == nullptr){
+		delete game_state_machine;
+	}
+
+	game_state_machine = nullptr;
 
 	if (instance != nullptr){
 		delete instance;

@@ -8,6 +8,9 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "PlayState.h"
+#include "MenuState.h"
+#include "GameStateMachine.h"
 #include <vector>
 
 class Game{
@@ -19,6 +22,7 @@ class Game{
 
 		int current_frame;
 		TextureManager * g_textures = TextureManager::getInstance();
+		GameStateMachine * game_state_machine;
 
 		std::vector<GameObject *> game_objects;
 
