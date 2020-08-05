@@ -5,9 +5,10 @@ INC	   = $(HOME)/include
 SRC      = $(HOME)/src
 OBJ      = $(HOME)/obj
 
-FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
+FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 SDL_LINK = -lSDL2 -lSDL2_image
-MENSAJE = "Compilando\ usando\ C++17,\ con\ todos\ los\ warnings\ activados"
+MENSAJE = "Compilando\ usando\ C++17,\ con\ máxima\ optimización\ \
+			 y\ con\ todos\ los\ warnings\ activados"
 
 OBJETIVO = $(BIN)/main
 OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/LoaderParams.o $(OBJ)/SDLGameObject.o \
@@ -20,6 +21,12 @@ SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
 
 all: clean INICIO $(OBJETIVO) FIN
+
+
+debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
+debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ \
+	con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ deputación"
+debug: all
 
 define compilar_objeto
 	@$(SUMA)
