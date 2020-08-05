@@ -4,6 +4,8 @@
 
 InputHandler::InputHandler() {
 	joysticks_initialised = false;
+
+	mouse_button_states = std::vector<bool>(3, false);
 }
 
 InputHandler::~InputHandler(){
@@ -79,7 +81,18 @@ void InputHandler::update(){
 
 		} else if ( event.type == SDL_JOYBUTTONUP ) {
 			button_states[event.jaxis.which][event.jbutton.button] = false;
+
+		} else if ( event.type == SDL_MOUSEBUTTONDOWN ) {
+			// El izquierdo es 1, central 2 y derecha 3
+			// por lo que le restamos 1 para tener 0, 1 y 2
+			mouse_button_states[event.button.button - 1] = true;
+
+		} else if ( event.type == SDL_MOUSEBUTTONUP ) {
+			// El izquierdo es 1, central 2 y derecha 3
+			// por lo que le restamos 1 para tener 0, 1 y 2
+			mouse_button_states[event.button.button - 1] = false;
 		}
+
 
 
 
@@ -185,5 +198,8 @@ bool InputHandler::getButtonState(const int joy, const int button_number)const{
 	return button_states[joy][button_number];
 }
 
+bool InputHandler::getMouseButtonState(const int button) const {
+	return mouse_button_states[button];
+}
 
 InputHandler * InputHandler::instance = nullptr;
