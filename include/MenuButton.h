@@ -11,8 +11,12 @@ class MenuButton : public SDLGameObject {
 			CLICKED = 2
 		};
 
+		void (*callback) ();
+
+		bool button_released;
+
 	public:
-		MenuButton(const LoaderParams * params);
+		MenuButton(const LoaderParams * params, void (*func)());
 
 		virtual void draw();
 		virtual void update();
