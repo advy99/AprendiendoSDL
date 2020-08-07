@@ -21,7 +21,7 @@ X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
 
-all: clean INICIO $(OBJETIVO) FIN
+all: INICIO $(OBJETIVO) FIN
 
 
 debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
