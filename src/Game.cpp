@@ -76,9 +76,7 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 		}
 	}
 
-	if ( success ) {
-		g_running = true;
-	}
+	g_running = success;
 
 	return success;
 
@@ -92,9 +90,11 @@ void Game::render() {
 
 	//g_textures.drawFrame("animate", 100, 100, 128, 82, 1, current_frame, g_renderer);
 
-	for (unsigned i = 0; i < game_objects.size(); i++){
-		game_objects[i]->draw();
-	}
+	//for (unsigned i = 0; i < game_objects.size(); i++){
+	//	game_objects[i]->draw();
+	//}
+
+	game_state_machine->render();
 
 	SDL_RenderPresent(g_renderer);
 
@@ -138,14 +138,19 @@ void Game::clean() {
 
 void Game::update(){
 
+	game_state_machine->update();
 	//current_frame = int( (SDL_GetTicks() / 100 ) % 6 );
-	for (unsigned i = 0; i < game_objects.size(); i++){
-		game_objects[i]->update();
-	}
+	// for (unsigned i = 0; i < game_objects.size(); i++){
+	// 	game_objects[i]->update();
+	// }
 }
 
 void Game::handleEvents() {
 	InputHandler::getInstance()->update();
+
+	if ( InputHandler::getInstance()->isKeyDown(SDL_SCANCODE_RETURN) ) {
+		game_state_machine->changeState(new PlayState());
+	}
 }
 
 bool Game::running() const {
@@ -155,5 +160,10 @@ bool Game::running() const {
 SDL_Renderer * Game::getRenderer() const {
 	return g_renderer;
 }
+
+GameStateMachine * Game::getStateMachine() {
+	return game_state_machine;
+}
+
 
 Game * Game::instance = nullptr;

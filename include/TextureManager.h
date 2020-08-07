@@ -36,6 +36,8 @@ class TextureManager {
 							SDL_Renderer * g_renderer,
 							const SDL_RendererFlip flip = SDL_FLIP_NONE);
 
+		void clearFromTextureMap(const std::string id);
+
 };
 
 
