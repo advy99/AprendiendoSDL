@@ -54,18 +54,18 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 							 << SDL_GetError() << "." << std::endl;
 				success = false;
 			} else {
-				SDL_SetRenderDrawColor(g_renderer, 255, 0, 0, 255);
+				SDL_SetRenderDrawColor(g_renderer, 0, 0, 0, 255);
 
-				g_textures->load("assets/animate.png", "animate", g_renderer);
+				// g_textures->load("assets/animate.png", "animate", g_renderer);
 
-				Player * game_player = new Player(new LoaderParams(300, 300,
-																					128, 82,
-																				  	"animate"));
-				Enemy * game_enemy = new Enemy(new LoaderParams(0, 0, 128, 82,
-																			   "animate"));
+				// Player * game_player = new Player(new LoaderParams(300, 300,
+				// 																	128, 82,
+				// 																  	"animate"));
+				// Enemy * game_enemy = new Enemy(new LoaderParams(0, 0, 128, 82,
+				// 															   "animate"));
 
-				game_objects.push_back(game_player);
-				game_objects.push_back(game_enemy);
+				// game_objects.push_back(game_player);
+				// game_objects.push_back(game_enemy);
 
 				InputHandler::getInstance()->initialiseJoysticks();
 
