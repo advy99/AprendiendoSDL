@@ -47,6 +47,8 @@ class Game{
 		SDL_Renderer * getRenderer() const;
 		void quit();
 
+		GameStateMachine * getStateMachine();
+
 
 };
 

@@ -161,4 +161,9 @@ SDL_Renderer * Game::getRenderer() const {
 	return g_renderer;
 }
 
+GameStateMachine * Game::getStateMachine() {
+	return game_state_machine;
+}
+
+
 Game * Game::instance = nullptr;
