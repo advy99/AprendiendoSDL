@@ -10,6 +10,7 @@
 class TextureManager {
 	private:
 		static std::map<std::string, SDL_Texture *> g_texture_map;
+		static std::map<std::string, int> texture_frames;
 
 		TextureManager() {};
 
@@ -23,7 +24,7 @@ class TextureManager {
 		void clean();
 
 		bool load(const std::string file, const std::string id,
-					 SDL_Renderer * g_renderer);
+					 const int num_frames, SDL_Renderer * g_renderer);
 
 		void draw(const std::string id, const int X, const int Y,
 					 const int WIDTH, const int HEIGHT,
@@ -37,6 +38,8 @@ class TextureManager {
 							const SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 		void clearFromTextureMap(const std::string id);
+
+		static int getTextureNumFrames(const std::string id);
 
 };
 

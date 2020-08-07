@@ -25,7 +25,7 @@ TextureManager * TextureManager::getInstance(){
 }
 
 bool TextureManager::load(const std::string file, const std::string id,
-								  SDL_Renderer * g_renderer){
+								  const int n_frames, SDL_Renderer * g_renderer){
 
 	bool success = true;
 
@@ -39,6 +39,7 @@ bool TextureManager::load(const std::string file, const std::string id,
 
 		if (texture != nullptr){
 			g_texture_map[id] = texture;
+			texture_frames[id] = n_frames;
 		} else {
 			std::cerr << "Failed to load texture "  << std::endl;
 			std::cerr << "SDL_Error: " << SDL_GetError() << std::endl;
@@ -109,8 +110,10 @@ void TextureManager::clearFromTextureMap(const std::string id) {
 	g_texture_map.erase(id);
 }
 
-
-
+int TextureManager::getTextureNumFrames(const std::string id) {
+	return texture_frames[id];
+}
 
 TextureManager * TextureManager::instance = nullptr;
 std::map<std::string, SDL_Texture *> TextureManager::g_texture_map;
+std::map<std::string, int> TextureManager::texture_frames;

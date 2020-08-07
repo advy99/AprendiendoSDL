@@ -2,10 +2,15 @@
 #define PLAYSTATE_H_INCLUDED
 
 #include "GameState.h"
+#include "GameObject.h"
+#include <vector>
 
 class PlayState : public GameState {
 	private:
 		static const std::string play_id;
+		std::vector<GameObject *> play_objects;
+
+		bool exiting;
 
 	public:
 		virtual ~PlayState() = default;
