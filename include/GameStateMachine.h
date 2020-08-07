@@ -15,6 +15,10 @@ class GameStateMachine {
 		void changeState(GameState * state);
 		void popState();
 
+		void update();
+		void render();
+
+
 };
 
 

@@ -38,3 +38,15 @@ void GameStateMachine::popState() {
 	}
 
 }
+
+void GameStateMachine::update() {
+	if ( !game_states.empty() ) {
+		game_states.top()->update();
+	}
+}
+
+void GameStateMachine::render() {
+	if ( !game_states.empty() ) {
+		game_states.top()->render();
+	}
+}
