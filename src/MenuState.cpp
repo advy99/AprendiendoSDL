@@ -82,6 +82,7 @@ std::string MenuState::getStateID() const {
 
 void MenuState::menuToPlay() {
 	std::cout << "Clicked Play button" << std::endl;
+	Game::getInstance()->getStateMachine()->changeState(new PlayState());
 }
 
 
