@@ -76,9 +76,7 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 		}
 	}
 
-	if ( success ) {
-		g_running = true;
-	}
+	g_running = success;
 
 	return success;
 
