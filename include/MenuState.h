@@ -14,6 +14,8 @@ class MenuState : public GameState {
 		static void menuToPlay();
 		static void exitFromMenu();
 
+		bool exiting;
+
 	public:
 		~MenuState();
 		virtual void update();

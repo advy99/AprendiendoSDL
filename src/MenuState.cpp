@@ -9,13 +9,13 @@ MenuState::~MenuState() {
 }
 
 void MenuState::update(){
-	for ( unsigned i = 0; i < menu_objects.size(); i++ ) {
+	for ( unsigned i = 0; i < menu_objects.size() && !exiting; i++ ) {
 		menu_objects[i]->update();
 	}
 }
 
 void MenuState::render() {
-	for ( unsigned i = 0; i < menu_objects.size(); i++ ) {
+	for ( unsigned i = 0; i < menu_objects.size() && !exiting; i++ ) {
 		menu_objects[i]->draw();
 	}
 
@@ -26,13 +26,13 @@ bool MenuState::onEnter() {
 	std::cout << "Entering menu" << std::endl;
 
 	bool success = TextureManager::getInstance()->load("assets/play_button.png",
-															"playbutton",
+															"playbutton", 3,
 															Game::getInstance()->getRenderer());
 
 
 	if ( success ) {
 		success = TextureManager::getInstance()->load("assets/exit_button.png",
-															"exitbutton",
+															"exitbutton", 3,
 															Game::getInstance()->getRenderer());
 	}
 
@@ -48,7 +48,10 @@ bool MenuState::onEnter() {
 
 		delete params_b1;
 		delete params_b2;
+
 	}
+
+	exiting = !success;
 
 	return success;
 
@@ -70,6 +73,7 @@ bool MenuState::onExit() {
 	TextureManager::getInstance()->clearFromTextureMap("exitbutton");
 
 
+	exiting = success;
 	return success;
 
 }
@@ -82,6 +86,7 @@ std::string MenuState::getStateID() const {
 
 void MenuState::menuToPlay() {
 	std::cout << "Clicked Play button" << std::endl;
+
 	Game::getInstance()->getStateMachine()->changeState(new PlayState());
 }
 

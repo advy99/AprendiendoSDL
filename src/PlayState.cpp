@@ -1,19 +1,44 @@
 #include "PlayState.h"
+#include "Game.h"
 #include <iostream>
 
 void PlayState::update() {
 
+	for ( unsigned i = 0; i < play_objects.size(); i++ ) {
+		play_objects[i]->update();
+	}
+
 }
 
 void PlayState::render() {
+	for ( unsigned i = 0; i < play_objects.size(); i++ ) {
+		play_objects[i]->draw();
+	}
 
 }
 
 bool PlayState::onEnter() {
 	std::cout << "Entering Play state" << std::endl;
 
-	bool success = true;
+	bool success;
 
+	success = TextureManager::getInstance()->load("assets/helicopter0.png",
+															"helicopter0", 5,
+															Game::getInstance()->getRenderer());
+
+	if ( success ) {
+		LoaderParams * params_player = new LoaderParams(100, 100, 128, 55,
+																		"helicopter0");
+
+		GameObject * player = new Player(params_player);
+
+		play_objects.push_back(player);
+
+		delete params_player;
+
+	}
+
+	exiting = !success;
 
 	return success;
 }
@@ -23,6 +48,15 @@ bool PlayState::onExit() {
 
 	bool success = true;
 
+	for ( unsigned i = 0; i < play_objects.size(); i++ ) {
+		play_objects[i]->clean();
+		delete play_objects[i];
+	}
+
+	play_objects.clear();
+	TextureManager::getInstance()->clearFromTextureMap("helicopter0");
+
+	exiting = success;
 
 	return success;
 }
