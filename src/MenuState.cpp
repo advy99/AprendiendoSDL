@@ -25,13 +25,13 @@ void MenuState::render() {
 bool MenuState::onEnter() {
 	std::cout << "Entering menu" << std::endl;
 
-	bool success = TextureManager::getInstance()->load("assets/button.png",
+	bool success = TextureManager::getInstance()->load("assets/play_button.png",
 															"playbutton",
 															Game::getInstance()->getRenderer());
 
 
 	if ( success ) {
-		success = TextureManager::getInstance()->load("assets/exit.png",
+		success = TextureManager::getInstance()->load("assets/exit_button.png",
 															"exitbutton",
 															Game::getInstance()->getRenderer());
 	}
