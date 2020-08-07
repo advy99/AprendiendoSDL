@@ -50,7 +50,7 @@ void InputHandler::update(){
 			onMouseButtonDown(event);
 
 		} else if ( event.type == SDL_MOUSEBUTTONUP ) {
-			onMouseButtonDown(event);
+			onMouseButtonUp(event);
 
 		} else if ( event.type == SDL_MOUSEMOTION ) {
 			onMouseMotion(event);
