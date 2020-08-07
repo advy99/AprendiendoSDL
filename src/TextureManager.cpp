@@ -101,5 +101,16 @@ void TextureManager::drawFrame(const std::string id, const int X, const int Y,
 
 }
 
+void TextureManager::clearFromTextureMap(const std::string id) {
+
+	SDL_DestroyTexture(g_texture_map[id]);
+
+
+	g_texture_map.erase(id);
+}
+
+
+
+
 TextureManager * TextureManager::instance = nullptr;
 std::map<std::string, SDL_Texture *> TextureManager::g_texture_map;
