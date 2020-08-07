@@ -14,7 +14,7 @@ OBJETIVO = $(BIN)/main
 OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/LoaderParams.o $(OBJ)/SDLGameObject.o \
 			 $(OBJ)/Player.o $(OBJ)/Vector2D.o $(OBJ)/MenuState.o $(OBJ)/Enemy.o \
 			 $(OBJ)/PlayState.o $(OBJ)/InputHandler.o $(OBJ)/Game.o \
-			 $(OBJ)/GameStateMachine.o $(OBJ)/main.o
+			 $(OBJ)/GameStateMachine.o $(OBJ)/MenuButton.o $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -85,6 +85,9 @@ $(OBJ)/PlayState.o: $(SRC)/PlayState.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/MenuState.o: $(SRC)/MenuState.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/MenuButton.o: $(SRC)/MenuButton.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/GameStateMachine.o: $(SRC)/GameStateMachine.cpp
