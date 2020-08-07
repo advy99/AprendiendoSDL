@@ -12,6 +12,7 @@ void MenuButton::draw() {
 	SDLGameObject::draw();
 }
 
+
 void MenuButton::update() {
 	Vector2D * mouse_position = InputHandler::getInstance()->getMousePosition();
 
@@ -30,7 +31,7 @@ void MenuButton::update() {
 
 			button_released = false;
 		} else if ( !InputHandler::getInstance()->getMouseButtonState(LEFT) ) {
-			button_released = false;
+			button_released = true;
 			current_frame = MOUSE_OVER;
 		}
 
