@@ -40,8 +40,8 @@ bool MenuState::onEnter() {
 		LoaderParams * params_b1 = new LoaderParams(100, 100, 400, 100, "playbutton");
 		LoaderParams * params_b2 = new LoaderParams(100, 300, 400, 100, "exitbutton");
 
-		GameObject * button1 = new MenuButton(params_b1);
-		GameObject * button2 = new MenuButton(params_b2);
+		GameObject * button1 = new MenuButton(params_b1, menuToPlay);
+		GameObject * button2 = new MenuButton(params_b2, exitFromMenu);
 
 		menu_objects.push_back(button1);
 		menu_objects.push_back(button2);
@@ -80,7 +80,15 @@ std::string MenuState::getStateID() const {
 }
 
 
+void MenuState::menuToPlay() {
+	std::cout << "Clicked Play button" << std::endl;
+}
 
+
+void MenuState::exitFromMenu() {
+	std::cout << "Clicked Exit button" << std::endl;
+	Game::getInstance()->quit();
+}
 
 
 const std::string MenuState::menu_id = "MENU";

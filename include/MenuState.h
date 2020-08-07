@@ -11,6 +11,9 @@ class MenuState : public GameState {
 
 		std::vector<GameObject *> menu_objects;
 
+		static void menuToPlay();
+		static void exitFromMenu();
+
 	public:
 		~MenuState();
 		virtual void update();
