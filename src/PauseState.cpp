@@ -42,9 +42,9 @@ bool PauseState::onEnter() {
 	}
 
 	if ( success ) {
-		LoaderParams * resume_b = new LoaderParams(200, 100, 200, 80,
+		LoaderParams * main_b = new LoaderParams(200, 100, 200, 80,
 																"mainButton");
-		LoaderParams * main_b = new LoaderParams(200, 300, 200, 80, "resumeButton");
+		LoaderParams * resume_b = new LoaderParams(200, 300, 200, 80, "resumeButton");
 
 		GameObject * main_button = new MenuButton(main_b, pauseToMain);
 		GameObject * resume_button = new MenuButton(resume_b, resumePlay);
