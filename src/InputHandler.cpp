@@ -269,4 +269,9 @@ void InputHandler::onJoystickAxisMove(const SDL_Event event){
 
 }
 
+void InputHandler::reset(){
+	mouse_button_states = std::vector<bool>(3, false);
+}
+
+
 InputHandler * InputHandler::instance = nullptr;

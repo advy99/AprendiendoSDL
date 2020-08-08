@@ -13,21 +13,25 @@ SDLGameObject::SDLGameObject(const LoaderParams * params)
 
 	current_frame = 1;
 	current_row = 1;
+
+	last_flip = SDL_FLIP_NONE;
 }
 
 void SDLGameObject::draw(){
 
-	SDL_RendererFlip flip = SDL_FLIP_NONE;
-
+	// if its zero, the last used
 	if ( velocity.getX() > 0 ) {
-		flip = SDL_FLIP_HORIZONTAL;
+		last_flip = SDL_FLIP_HORIZONTAL;
+
+	} else if ( velocity.getX() < 0 ) {
+		last_flip = SDL_FLIP_NONE;
 	}
 
 	TextureManager::getInstance()->drawFrame(texture_id, position.getX(),
 														  position.getY(), width, height,
 														  current_row, current_frame,
 														  Game::getInstance()->getRenderer(),
-														  flip);
+														  last_flip);
 }
 
 void SDLGameObject::update() {
