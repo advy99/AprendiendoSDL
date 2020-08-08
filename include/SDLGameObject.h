@@ -22,6 +22,8 @@ class SDLGameObject : public GameObject{
 		int width;
 		int height;
 
+		SDL_RendererFlip last_flip;
+
 		std::string texture_id;
 
 	public:
