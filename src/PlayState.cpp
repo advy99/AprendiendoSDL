@@ -1,8 +1,14 @@
 #include "PlayState.h"
+#include "InputHandler.h"
+#include "PauseState.h"
 #include "Game.h"
 #include <iostream>
 
 void PlayState::update() {
+
+	if ( InputHandler::getInstance()->isKeyDown(SDL_SCANCODE_ESCAPE) ){
+		Game::getInstance()->getStateMachine()->pushState(new PauseState());
+	}
 
 	for ( unsigned i = 0; i < play_objects.size(); i++ ) {
 		play_objects[i]->update();
