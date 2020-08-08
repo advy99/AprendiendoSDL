@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "MenuState.h"
 #include "MenuButton.h"
+#include "InputHandler.h"
 
 std::string PauseState::getStateID() const {
 	return pause_id;
@@ -72,6 +73,8 @@ bool PauseState::onExit() {
 
 	TextureManager::getInstance()->clearFromTextureMap("resumeButton");
 	TextureManager::getInstance()->clearFromTextureMap("mainButton");
+
+	InputHandler::getInstance()->reset();
 
 
 	exiting = true;

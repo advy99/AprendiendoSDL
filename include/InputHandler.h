@@ -55,6 +55,8 @@ class InputHandler {
 		Vector2D * getMousePosition() const;
 		bool isKeyDown(const SDL_Scancode key) const;
 
+		void reset();
+
 };
 
 
