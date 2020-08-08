@@ -10,7 +10,6 @@ class PlayState : public GameState {
 		static const std::string play_id;
 		std::vector<GameObject *> play_objects;
 
-		bool exiting;
 
 	public:
 		virtual ~PlayState() = default;

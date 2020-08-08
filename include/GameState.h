@@ -4,7 +4,9 @@
 #include <string>
 
 class GameState {
-	private:
+	protected:
+
+		bool exiting;
 
 	public:
 		virtual ~GameState() {};

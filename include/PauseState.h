@@ -14,8 +14,6 @@ class PauseState : public GameState {
 
 		std::vector<GameObject *> pause_objects;
 
-		bool exiting;
-
 
 	public:
 
