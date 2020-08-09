@@ -106,9 +106,8 @@ bool PlayState::checkCollision(const SDLGameObject * p1,
 	int bottomB = topB + p2->getHeight();
 
 
-	collision = ( bottomA >= topB && topA <= bottomB ) ||
+	collision = ( bottomA >= topB && topA <= bottomB ) &&
 					( rightA >= leftB && leftA <= rightB );
-
 
 
 	return collision;
