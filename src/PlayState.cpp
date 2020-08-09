@@ -10,14 +10,14 @@ void PlayState::update() {
 		Game::getInstance()->getStateMachine()->pushState(new PauseState());
 	}
 
-	for ( unsigned i = 0; i < play_objects.size(); i++ ) {
+	for ( unsigned i = 0; i < play_objects.size() && !exiting; i++ ) {
 		play_objects[i]->update();
 	}
 
 }
 
 void PlayState::render() {
-	for ( unsigned i = 0; i < play_objects.size(); i++ ) {
+	for ( unsigned i = 0; i < play_objects.size() && !exiting; i++ ) {
 		play_objects[i]->draw();
 	}
 
@@ -33,6 +33,7 @@ bool PlayState::onEnter() {
 															Game::getInstance()->getRenderer());
 
 	if ( success ) {
+		play_objects.clear();
 		LoaderParams * params_player = new LoaderParams(100, 100, 128, 55,
 																		"helicopter0");
 
