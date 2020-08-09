@@ -1,6 +1,7 @@
 #include "PlayState.h"
 #include "InputHandler.h"
 #include "PauseState.h"
+#include "GameOverState.h"
 #include "Game.h"
 #include <iostream>
 
@@ -12,6 +13,11 @@ void PlayState::update() {
 
 	for ( unsigned i = 0; i < play_objects.size() && !exiting; i++ ) {
 		play_objects[i]->update();
+	}
+
+	if ( checkCollision(dynamic_cast<SDLGameObject *> (play_objects[0]),
+							  dynamic_cast<SDLGameObject *> (play_objects[1]) ) ){
+		Game::getInstance()->getStateMachine()->pushState(new GameOverState());
 	}
 
 }
@@ -83,6 +89,30 @@ std::string PlayState::getStateID() const {
 	return play_id;
 }
 
+bool PlayState::checkCollision(const SDLGameObject * p1,
+										 const SDLGameObject * p2){
+	bool collision = false;
+
+
+	int leftA = p1->getPosition().getX();
+	int rightA = leftA + p1->getWidth();
+	int topA = p1->getPosition().getY();
+	int bottomA = topA + p1->getHeight();
+
+
+	int leftB = p2->getPosition().getX();
+	int rightB = leftB + p2->getWidth();
+	int topB = p2->getPosition().getY();
+	int bottomB = topB + p2->getHeight();
+
+
+	collision = ( bottomA >= topB && topA <= bottomB ) ||
+					( rightA >= leftB && leftA <= rightB );
+
+
+
+	return collision;
+}
 
 
 
