@@ -37,6 +37,7 @@ bool MenuState::onEnter() {
 	}
 
 	if ( success ) {
+		menu_objects.clear();
 		LoaderParams * params_b1 = new LoaderParams(100, 100, 400, 100, "playbutton");
 		LoaderParams * params_b2 = new LoaderParams(100, 300, 400, 100, "exitbutton");
 

@@ -35,6 +35,12 @@ class SDLGameObject : public GameObject{
 		virtual void update();
 		virtual void clean();
 
+		Vector2D getPosition() const;
+		int getWidth() const;
+		int getHeight() const;
+
+
+
 };
 
 

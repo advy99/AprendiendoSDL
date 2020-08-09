@@ -43,6 +43,7 @@ bool PauseState::onEnter() {
 	}
 
 	if ( success ) {
+		pause_objects.clear();
 		LoaderParams * main_b = new LoaderParams(200, 100, 200, 80,
 																"mainButton");
 		LoaderParams * resume_b = new LoaderParams(200, 300, 200, 80, "resumeButton");
