@@ -14,14 +14,14 @@ class MenuState : public GameState {
 		static void menuToPlay();
 		static void exitFromMenu();
 
+		virtual bool onExit();
 
 	public:
-		~MenuState();
+		virtual ~MenuState();
 		virtual void update();
 		virtual void render();
 
 		virtual bool onEnter();
-		virtual bool onExit();
 
 		virtual std::string getStateID() const;
 

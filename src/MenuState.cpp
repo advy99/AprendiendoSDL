@@ -6,16 +6,20 @@
 
 MenuState::~MenuState() {
 
+	onExit();
 }
 
 void MenuState::update(){
-	for ( unsigned i = 0; i < menu_objects.size() && !exiting; i++ ) {
+	for ( unsigned i = 0; i < menu_objects.size() &&
+								!GameStateMachine::isChanging(); i++ ) {
 		menu_objects[i]->update();
+
 	}
 }
 
 void MenuState::render() {
-	for ( unsigned i = 0; i < menu_objects.size() && !exiting; i++ ) {
+	for ( unsigned i = 0; i < menu_objects.size() &&
+								!GameStateMachine::isChanging(); i++ ) {
 		menu_objects[i]->draw();
 	}
 
@@ -52,7 +56,6 @@ bool MenuState::onEnter() {
 
 	}
 
-	exiting = !success;
 
 	return success;
 
@@ -74,7 +77,6 @@ bool MenuState::onExit() {
 	TextureManager::getInstance()->clearFromTextureMap("exitbutton");
 
 
-	exiting = success;
 	return success;
 
 }

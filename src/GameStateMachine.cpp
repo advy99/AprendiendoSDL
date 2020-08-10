@@ -11,6 +11,7 @@ void GameStateMachine::pushState(GameState * state) {
 	game_states.push(state);
 	game_states.top()->onEnter();
 
+	changing = true;
 }
 
 void GameStateMachine::changeState(GameState * state) {
@@ -24,24 +25,28 @@ void GameStateMachine::changeState(GameState * state) {
 		pushState(state);
 	}
 
+	changing = true;
+
 }
 
 
 void GameStateMachine::popState() {
 	if ( !game_states.empty() ) {
-		if ( game_states.top()->onExit() ){
-
+		changing = true;
+		if ( game_states.top() != nullptr ) {
 			delete game_states.top();
+			game_states.top() = nullptr;
 			game_states.pop();
-
 		}
-	}
 
+	}
 }
 
 void GameStateMachine::update() {
+	changing = false;
 	if ( !game_states.empty() ) {
-		game_states.top()->update();
+		if ( game_states.top() != nullptr )
+			game_states.top()->update();
 	}
 }
 
@@ -50,3 +55,10 @@ void GameStateMachine::render() {
 		game_states.top()->render();
 	}
 }
+
+bool GameStateMachine::isChanging() {
+	return changing;
+}
+
+
+bool GameStateMachine::changing = false;

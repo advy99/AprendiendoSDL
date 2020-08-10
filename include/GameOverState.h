@@ -17,12 +17,13 @@ class GameOverState : public GameState {
 
 		bool exiting;
 
-	public:
+		virtual bool onExit();
 
+	public:
+		virtual ~GameOverState();
 		virtual void update();
 		virtual void render();
 		virtual bool onEnter();
-		virtual bool onExit();
 
 		virtual std::string getStateID() const;
 

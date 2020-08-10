@@ -7,6 +7,7 @@
 class GameStateMachine {
 	private:
 		std::stack<GameState *> game_states;
+		static bool changing;
 
 
 	public:
@@ -17,6 +18,8 @@ class GameStateMachine {
 
 		void update();
 		void render();
+
+		static bool isChanging() ;
 
 
 };

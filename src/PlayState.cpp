@@ -5,13 +5,17 @@
 #include "Game.h"
 #include <iostream>
 
+PlayState::~PlayState() {
+	onExit();
+}
+
 void PlayState::update() {
 
 	if ( InputHandler::getInstance()->isKeyDown(SDL_SCANCODE_ESCAPE) ){
 		Game::getInstance()->getStateMachine()->pushState(new PauseState());
 	}
 
-	for ( unsigned i = 0; i < play_objects.size() && !exiting; i++ ) {
+	for ( unsigned i = 0; i < play_objects.size() && !GameStateMachine::isChanging(); i++ ) {
 		play_objects[i]->update();
 	}
 
@@ -23,7 +27,7 @@ void PlayState::update() {
 }
 
 void PlayState::render() {
-	for ( unsigned i = 0; i < play_objects.size() && !exiting; i++ ) {
+	for ( unsigned i = 0; i < play_objects.size() && !GameStateMachine::isChanging(); i++ ) {
 		play_objects[i]->draw();
 	}
 
@@ -62,7 +66,6 @@ bool PlayState::onEnter() {
 
 	}
 
-	exiting = !success;
 
 	return success;
 }
@@ -80,7 +83,6 @@ bool PlayState::onExit() {
 	play_objects.clear();
 	TextureManager::getInstance()->clearFromTextureMap("helicopter0");
 
-	exiting = success;
 
 	return success;
 }
