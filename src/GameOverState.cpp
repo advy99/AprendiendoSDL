@@ -95,8 +95,8 @@ bool GameOverState::onExit(){
 
 void GameOverState::update() {
 	for ( unsigned i = 0; i < game_over_objects.size() && !exiting; i++ ) {
-		if ( game_over_objects[i] != nullptr )
-			game_over_objects[i]->update();
+		game_over_objects[i]->update();
+		exiting = GameStateMachine::isChanging();
 	}
 }
 

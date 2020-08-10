@@ -12,6 +12,8 @@ MenuState::~MenuState() {
 void MenuState::update(){
 	for ( unsigned i = 0; i < menu_objects.size() && !exiting; i++ ) {
 		menu_objects[i]->update();
+		exiting = GameStateMachine::isChanging();
+
 	}
 }
 

@@ -24,6 +24,7 @@ void PauseState::resumePlay() {
 void PauseState::update() {
 	for ( unsigned i = 0; i < pause_objects.size() && !exiting; i++ ) {
 		pause_objects[i]->update();
+		exiting = GameStateMachine::isChanging();
 	}
 }
 

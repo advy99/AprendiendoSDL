@@ -17,6 +17,7 @@ void PlayState::update() {
 
 	for ( unsigned i = 0; i < play_objects.size() && !exiting; i++ ) {
 		play_objects[i]->update();
+		exiting = GameStateMachine::isChanging();
 	}
 
 	if ( checkCollision(dynamic_cast<SDLGameObject *> (play_objects[0]),
