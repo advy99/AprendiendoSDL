@@ -5,6 +5,10 @@
 #include "AnimatedGraphic.h"
 #include "InputHandler.h"
 
+GameOverState::~GameOverState() {
+	onExit();
+}
+
 std::string GameOverState::getStateID() const {
 	return game_over_id;
 }
@@ -67,6 +71,7 @@ bool GameOverState::onExit(){
 	for ( unsigned i = 0; i < game_over_objects.size(); i++ ){
 		game_over_objects[i]->clean();
 		delete game_over_objects[i];
+		game_over_objects[i] = nullptr;
 	}
 
 	game_over_objects.clear();
@@ -90,14 +95,16 @@ bool GameOverState::onExit(){
 
 void GameOverState::update() {
 	for ( unsigned i = 0; i < game_over_objects.size() && !exiting; i++ ) {
-		game_over_objects[i]->update();
+		if ( game_over_objects[i] != nullptr )
+			game_over_objects[i]->update();
 	}
 }
 
 
 void GameOverState::render() {
 	for ( unsigned i = 0; i < game_over_objects.size() && !exiting; i++ ) {
-		game_over_objects[i]->draw();
+		if ( game_over_objects[i] != nullptr )
+			game_over_objects[i]->draw();
 	}
 }
 

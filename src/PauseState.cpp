@@ -4,6 +4,10 @@
 #include "MenuButton.h"
 #include "InputHandler.h"
 
+PauseState::~PauseState() {
+	onExit();
+}
+
 std::string PauseState::getStateID() const {
 	return pause_id;
 }

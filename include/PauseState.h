@@ -14,14 +14,15 @@ class PauseState : public GameState {
 
 		std::vector<GameObject *> pause_objects;
 
+		virtual bool onExit();
 
 	public:
+		virtual ~PauseState();
 
 		virtual void update();
 		virtual void render();
 
 		virtual bool onEnter();
-		virtual bool onExit();
 
 		virtual std::string getStateID() const;
 

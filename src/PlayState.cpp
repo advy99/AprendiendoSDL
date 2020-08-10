@@ -5,6 +5,10 @@
 #include "Game.h"
 #include <iostream>
 
+PlayState::~PlayState() {
+	onExit();
+}
+
 void PlayState::update() {
 
 	if ( InputHandler::getInstance()->isKeyDown(SDL_SCANCODE_ESCAPE) ){

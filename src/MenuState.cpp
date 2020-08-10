@@ -6,6 +6,7 @@
 
 MenuState::~MenuState() {
 
+	onExit();
 }
 
 void MenuState::update(){

@@ -29,19 +29,19 @@ void GameStateMachine::changeState(GameState * state) {
 
 void GameStateMachine::popState() {
 	if ( !game_states.empty() ) {
-		if ( game_states.top()->onExit() ){
-
+		if ( game_states.top() != nullptr ) {
 			delete game_states.top();
+			game_states.top() = nullptr;
 			game_states.pop();
-
 		}
-	}
 
+	}
 }
 
 void GameStateMachine::update() {
 	if ( !game_states.empty() ) {
-		game_states.top()->update();
+		if ( game_states.top() != nullptr )
+			game_states.top()->update();
 	}
 }
 
