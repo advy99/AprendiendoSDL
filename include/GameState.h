@@ -6,7 +6,6 @@
 class GameState {
 	protected:
 
-		bool exiting;
 		virtual bool onExit() = 0;
 
 	public:

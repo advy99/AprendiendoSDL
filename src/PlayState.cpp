@@ -15,9 +15,8 @@ void PlayState::update() {
 		Game::getInstance()->getStateMachine()->pushState(new PauseState());
 	}
 
-	for ( unsigned i = 0; i < play_objects.size() && !exiting; i++ ) {
+	for ( unsigned i = 0; i < play_objects.size() && !GameStateMachine::isChanging(); i++ ) {
 		play_objects[i]->update();
-		exiting = GameStateMachine::isChanging();
 	}
 
 	if ( checkCollision(dynamic_cast<SDLGameObject *> (play_objects[0]),
@@ -28,7 +27,7 @@ void PlayState::update() {
 }
 
 void PlayState::render() {
-	for ( unsigned i = 0; i < play_objects.size() && !exiting; i++ ) {
+	for ( unsigned i = 0; i < play_objects.size() && !GameStateMachine::isChanging(); i++ ) {
 		play_objects[i]->draw();
 	}
 
@@ -67,7 +66,6 @@ bool PlayState::onEnter() {
 
 	}
 
-	exiting = !success;
 
 	return success;
 }
@@ -85,7 +83,6 @@ bool PlayState::onExit() {
 	play_objects.clear();
 	TextureManager::getInstance()->clearFromTextureMap("helicopter0");
 
-	exiting = success;
 
 	return success;
 }

@@ -22,15 +22,16 @@ void PauseState::resumePlay() {
 }
 
 void PauseState::update() {
-	for ( unsigned i = 0; i < pause_objects.size() && !exiting; i++ ) {
+	for ( unsigned i = 0; i < pause_objects.size() &&
+								!GameStateMachine::isChanging(); i++ ) {
 		pause_objects[i]->update();
-		exiting = GameStateMachine::isChanging();
 	}
 }
 
 
 void PauseState::render() {
-	for ( unsigned i = 0; i < pause_objects.size() && !exiting; i++ ) {
+	for ( unsigned i = 0; i < pause_objects.size() &&
+								!GameStateMachine::isChanging(); i++ ) {
 		pause_objects[i]->draw();
 	}
 }
@@ -62,7 +63,6 @@ bool PauseState::onEnter() {
 		delete resume_b;
 		delete main_b;
 
-		exiting = false;
 	}
 
 	return success;
@@ -83,10 +83,8 @@ bool PauseState::onExit() {
 	InputHandler::getInstance()->reset();
 
 
-	exiting = true;
 
-
-	return exiting;
+	return true;
 
 }
 

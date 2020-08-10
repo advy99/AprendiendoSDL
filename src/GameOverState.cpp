@@ -84,9 +84,6 @@ bool GameOverState::onExit(){
 	InputHandler::getInstance()->reset();
 
 
-	exiting = true;
-
-
 	return exiting;
 
 
@@ -94,17 +91,15 @@ bool GameOverState::onExit(){
 
 
 void GameOverState::update() {
-	for ( unsigned i = 0; i < game_over_objects.size() && !exiting; i++ ) {
+	for ( unsigned i = 0; i < game_over_objects.size() && !GameStateMachine::isChanging(); i++ ) {
 		game_over_objects[i]->update();
-		exiting = GameStateMachine::isChanging();
 	}
 }
 
 
 void GameOverState::render() {
-	for ( unsigned i = 0; i < game_over_objects.size() && !exiting; i++ ) {
-		if ( game_over_objects[i] != nullptr )
-			game_over_objects[i]->draw();
+	for ( unsigned i = 0; i < game_over_objects.size() && !GameStateMachine::isChanging(); i++ ) {
+		game_over_objects[i]->draw();
 	}
 }
 
