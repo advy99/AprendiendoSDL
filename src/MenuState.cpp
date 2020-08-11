@@ -30,20 +30,20 @@ bool MenuState::onEnter() {
 	std::cout << "Entering menu" << std::endl;
 
 	bool success = TextureManager::getInstance()->load("assets/play_button.png",
-															"playbutton", 3,
+															"playbutton",
 															Game::getInstance()->getRenderer());
 
 
 	if ( success ) {
 		success = TextureManager::getInstance()->load("assets/exit_button.png",
-															"exitbutton", 3,
+															"exitbutton",
 															Game::getInstance()->getRenderer());
 	}
 
 	if ( success ) {
 		menu_objects.clear();
-		LoaderParams * params_b1 = new LoaderParams(100, 100, 400, 100, "playbutton");
-		LoaderParams * params_b2 = new LoaderParams(100, 300, 400, 100, "exitbutton");
+		LoaderParams * params_b1 = new LoaderParams(100, 100, 400, 100, "playbutton", 3);
+		LoaderParams * params_b2 = new LoaderParams(100, 300, 400, 100, "exitbutton", 3);
 
 		GameObject * button1 = new MenuButton(params_b1, menuToPlay);
 		GameObject * button2 = new MenuButton(params_b2, exitFromMenu);

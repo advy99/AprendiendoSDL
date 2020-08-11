@@ -39,24 +39,26 @@ bool PlayState::onEnter() {
 	bool success;
 
 	success = TextureManager::getInstance()->load("assets/helicopter0.png",
-															"helicopter0", 5,
+															"helicopter0",
 															Game::getInstance()->getRenderer());
 
 
 	success = TextureManager::getInstance()->load("assets/helicopter1.png",
-															"helicopter1", 5,
+															"helicopter1",
 															Game::getInstance()->getRenderer());
 
 	if ( success ) {
 		play_objects.clear();
 		LoaderParams * params_player = new LoaderParams(500, 100, 128, 55,
-																		"helicopter0");
+																		"helicopter0", 5);
 
 		LoaderParams * params_enemy = new LoaderParams(100, 100, 128, 55,
-																		"helicopter1");
+																		"helicopter1", 5);
 
-		GameObject * player = new Player(params_player);
-		GameObject * enemy = new Enemy(params_enemy);
+		GameObject * player = new Player();
+		player->load(params_player);
+		GameObject * enemy = new Enemy();
+		enemy->load(params_enemy);
 
 		play_objects.push_back(player);
 		play_objects.push_back(enemy);
