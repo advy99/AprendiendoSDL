@@ -26,10 +26,12 @@ class SDLGameObject : public GameObject{
 
 		std::string texture_id;
 
+		int num_frames;
+
 	public:
 		//virtual void load(const int X, const int Y, const int WIDTH, const int HEIGHT,
 		//			 const std::string id);
-		SDLGameObject(const LoaderParams * params);
+		SDLGameObject();
 
 		virtual void draw();
 		virtual void update();
@@ -38,6 +40,8 @@ class SDLGameObject : public GameObject{
 		Vector2D getPosition() const;
 		int getWidth() const;
 		int getHeight() const;
+
+		virtual void load(const LoaderParams * params);
 
 
 

@@ -2,9 +2,14 @@
 
 LoaderParams::LoaderParams(const int X, const int Y,
 									const int WIDTH, const int HEIGHT,
-									const std::string id)
+									const std::string id, const int NUM_FRAMES,
+									const int CALLBACK_ID, const int ANIM_SPEED,
+									const SDL_RendererFlip INIT_FLIP)
 									:x_pos(X), y_pos(Y), width(WIDTH), height(HEIGHT),
-									 texture_id(id){
+									texture_id(id), num_frames(NUM_FRAMES),
+									callback_id(CALLBACK_ID), anim_speed(ANIM_SPEED),
+									flip(INIT_FLIP){
+
 
 }
 
