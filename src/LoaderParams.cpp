@@ -35,3 +35,19 @@ int LoaderParams::getHeight() const{
 std::string LoaderParams::getTextureId() const{
 	return texture_id;
 }
+
+SDL_RendererFlip LoaderParams::getFlip() const {
+	return flip;
+}
+
+int LoaderParams::getAnimSpeed() const {
+	return anim_speed;
+}
+
+int LoaderParams::getCallbackID() const {
+	return callback_id;
+}
+
+int LoaderParams::getNumFrames() const {
+	return num_frames;
+}
