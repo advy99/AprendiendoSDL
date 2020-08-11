@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "InputHandler.h"
 
-Player::Player(const LoaderParams * params):SDLGameObject(params){
+Player::Player(  ):SDLGameObject(){
 
 }
 
@@ -15,8 +15,7 @@ void Player::update() {
 
 	handleInput();
 
-	current_frame = int( (SDL_GetTicks() / 100) %
-						TextureManager::getTextureNumFrames(texture_id)  );
+	current_frame = int( (SDL_GetTicks() / 100) % num_frames  );
 
 
 	SDLGameObject::update();
@@ -34,4 +33,13 @@ void Player::handleInput() {
 
 	velocity /= 10;
 
+}
+
+void Player::load(const LoaderParams * params) {
+	SDLGameObject::load(params);
+}
+
+
+GameObject * PlayerCreator::createGameObject() const {
+	return new Player();
 }

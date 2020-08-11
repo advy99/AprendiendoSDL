@@ -8,6 +8,7 @@ class Vector2D {
 		int y;
 
 	public:
+		Vector2D();
 		Vector2D(const int X, const int Y);
 
 		double length() const;

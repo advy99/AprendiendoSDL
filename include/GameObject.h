@@ -11,14 +11,14 @@ class GameObject {
 	private:
 
 	protected:
-		GameObject(const LoaderParams * g_params);
+		GameObject() {};
 
 
 	public:
-		GameObject() {};
 		virtual void draw() = 0;
 		virtual void update() = 0;
 		virtual void clean() = 0;
+		virtual void load(const LoaderParams * params) = 0;
 
 		virtual ~GameObject(){};
 };

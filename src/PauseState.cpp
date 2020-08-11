@@ -39,20 +39,20 @@ void PauseState::render() {
 bool PauseState::onEnter() {
 	bool success;
 	success = TextureManager::getInstance()->load("assets/resume_button.png",
-															"resumeButton", 3,
+															"resumeButton",
 															Game::getInstance()->getRenderer());
 
 	if ( success ) {
 		success = TextureManager::getInstance()->load("assets/main_menu_button.png",
-															"mainButton", 3,
+															"mainButton",
 															Game::getInstance()->getRenderer());
 	}
 
 	if ( success ) {
 		pause_objects.clear();
 		LoaderParams * main_b = new LoaderParams(200, 100, 200, 80,
-																"mainButton");
-		LoaderParams * resume_b = new LoaderParams(200, 300, 200, 80, "resumeButton");
+																"mainButton", 3);
+		LoaderParams * resume_b = new LoaderParams(200, 300, 200, 80, "resumeButton", 3);
 
 		GameObject * main_button = new MenuButton(main_b, pauseToMain);
 		GameObject * resume_button = new MenuButton(resume_b, resumePlay);

@@ -25,29 +25,29 @@ void GameOverState::restartPlay() {
 bool GameOverState::onEnter() {
 	bool success;
 	success = TextureManager::getInstance()->load("assets/gameover.png",
-															"gameOverText", 2,
+															"gameOverText",
 															Game::getInstance()->getRenderer());
 
 	if ( success ) {
 		success = TextureManager::getInstance()->load("assets/main_menu_button.png",
-															"mainButton", 3,
+															"mainButton",
 															Game::getInstance()->getRenderer());
 	}
 
 	if ( success ) {
 		success = TextureManager::getInstance()->load("assets/restart_button.png",
-															"restartButton", 3,
+															"restartButton",
 															Game::getInstance()->getRenderer());
 	}
 
 	if ( success ) {
 		LoaderParams * params_game_over = new LoaderParams(200, 100,
 																			190, 30,
-																		  	"gameOverText");
+																		  	"gameOverText", 2);
 		LoaderParams * params_main = new LoaderParams(200, 200, 200, 80,
-																	"mainButton");
+																	"mainButton", 3);
 		LoaderParams * params_restart = new LoaderParams(200, 300, 200, 80,
-																		"restartButton");
+																		"restartButton", 3);
 
 		GameObject * game_over = new AnimatedGraphic(params_game_over, 2);
 		GameObject * main_but = new MenuButton(params_main, gameOverToMain);
