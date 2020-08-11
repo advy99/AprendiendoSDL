@@ -15,8 +15,7 @@ void Player::update() {
 
 	handleInput();
 
-	current_frame = int( (SDL_GetTicks() / 100) %
-						TextureManager::getTextureNumFrames(texture_id)  );
+	current_frame = int( (SDL_GetTicks() / 100) % num_frames  );
 
 
 	SDLGameObject::update();
