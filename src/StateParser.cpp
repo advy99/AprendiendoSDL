@@ -9,7 +9,7 @@ bool StateParser::parseState(const char * state_file,
 
 	bool success;
 
-	success = xml_doc.LoadFile(state_file);
+	success = tinyxml2::XMLError::XML_SUCCESS == xml_doc.LoadFile(state_file);
 
 	if ( success ) {
 		tinyxml2::XMLElement * root = xml_doc.RootElement();
@@ -34,7 +34,9 @@ bool StateParser::parseState(const char * state_file,
 				}
 			}
 
-			parseTextures(texture_root, texture_ids);
+
+			if ( texture_root != nullptr )
+				parseTextures(texture_root, texture_ids);
 
 
 			tinyxml2::XMLElement * object_root = nullptr;
@@ -42,11 +44,12 @@ bool StateParser::parseState(const char * state_file,
 			for ( tinyxml2::XMLElement * xml_ele = state_root->FirstChildElement();
 					xml_ele != nullptr; xml_ele = xml_ele->NextSiblingElement() ) {
 				if ( xml_ele->Value() == std::string("OBJECTS" )) {
-					texture_root = xml_ele;
+					object_root = xml_ele;
 				}
 			}
 
-			parseObjects(object_root, objects);
+			if ( object_root != nullptr )
+				parseObjects(object_root, objects);
 		}
 
 	} else {
@@ -90,7 +93,7 @@ void StateParser::parseObjects(tinyxml2::XMLElement * state,
 		callback_id = element->IntAttribute("callback_id");
 		anim_speed = element->IntAttribute("anim_speed");
 
-		texture_id = element->Attribute("texture_id");
+		texture_id = std::string(element->Attribute("texture_id"));
 
 		LoaderParams * params = new LoaderParams(x, y, width, height, texture_id,
 															  num_frames, callback_id,
