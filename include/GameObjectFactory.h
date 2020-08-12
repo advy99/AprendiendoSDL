@@ -20,7 +20,7 @@ class GameObjectFactory {
 		std::map<std::string, BaseCreator *> creators;
 
 		void clean();
-		GameObjectFactory();
+		GameObjectFactory() {};
 
 		static GameObjectFactory * instance;
 
