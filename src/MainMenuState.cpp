@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "MenuButton.h"
 #include <iostream>
+#include "StateParser.h"
 
 MainMenuState::~MainMenuState() {
 
@@ -27,35 +28,14 @@ void MainMenuState::render() {
 
 
 bool MainMenuState::onEnter() {
-	std::cout << "Entering menu" << std::endl;
+	bool success = true;
 
-	bool success = TextureManager::getInstance()->load("assets/play_button.png",
-															"playbutton",
-															Game::getInstance()->getRenderer());
+	StateParser parser;
 
+	parser.parseState("test.xml", menu_id, &menu_objects, &texture_id_list);
 
-	if ( success ) {
-		success = TextureManager::getInstance()->load("assets/exit_button.png",
-															"exitbutton",
-															Game::getInstance()->getRenderer());
-	}
-
-	if ( success ) {
-		menu_objects.clear();
-		LoaderParams * params_b1 = new LoaderParams(100, 100, 400, 100, "playbutton", 3);
-		LoaderParams * params_b2 = new LoaderParams(100, 300, 400, 100, "exitbutton", 3);
-
-		GameObject * button1 = new MenuButton(params_b1, menuToPlay);
-		GameObject * button2 = new MenuButton(params_b2, exitFromMenu);
-
-		menu_objects.push_back(button1);
-		menu_objects.push_back(button2);
-
-		delete params_b1;
-		delete params_b2;
-
-	}
-
+	callbacks.push_back(menuToPlay);
+	callbacks.push_back(exitFromMenu);
 
 	return success;
 
@@ -73,8 +53,9 @@ bool MainMenuState::onExit() {
 
 	menu_objects.clear();
 
-	TextureManager::getInstance()->clearFromTextureMap("playbutton");
-	TextureManager::getInstance()->clearFromTextureMap("exitbutton");
+	for ( unsigned i = 0; i < texture_id_list.size(); i++ ) {
+		TextureManager::getInstance()->clearFromTextureMap(texture_id_list[i]);
+	}
 
 
 	return success;
@@ -98,6 +79,17 @@ void MainMenuState::exitFromMenu() {
 	std::cout << "Clicked Exit button" << std::endl;
 	Game::getInstance()->quit();
 }
+
+
+void MainMenuState::setCallbacks(const std::vector<Callback> & callbacks) {
+	for ( unsigned i = 0; i < menu_objects.size(); i++ ) {
+		MenuButton * button = dynamic_cast<MenuButton*> (menu_objects[i]) ;
+		if ( button != nullptr ) {
+			button->setCallback(callbacks[button->getCallbackID() ]);
+		}
+	}
+}
+
 
 
 const std::string MainMenuState::menu_id = "MENU";
