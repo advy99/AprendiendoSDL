@@ -27,7 +27,7 @@ class GameObjectFactory {
 	public:
 		void operator = (const GameObjectFactory & other) = delete;
 		GameObjectFactory(const GameObjectFactory & other) = delete;
-		GameObjectFactory * getInstance();
+		static GameObjectFactory * getInstance();
 
 		~GameObjectFactory();
 		bool registerType(const std::string type_id,  BaseCreator * creator);
