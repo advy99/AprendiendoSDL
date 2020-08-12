@@ -12,6 +12,7 @@ class MenuButton : public SDLGameObject {
 		};
 
 		void (*callback) ();
+		int callback_id;
 
 		bool button_released;
 
@@ -21,6 +22,10 @@ class MenuButton : public SDLGameObject {
 		virtual void draw();
 		virtual void update();
 		virtual void clean();
+		virtual void load(const LoaderParams * params);
+
+		void setCallback( void (*func)()  );
+		int getCallbackID() const;
 
 };
 

@@ -48,3 +48,17 @@ void MenuButton::update() {
 void MenuButton::clean() {
 	SDLGameObject::clean();
 }
+
+void MenuButton::load(const LoaderParams * params) {
+	SDLGameObject::load(params);
+	callback_id = params->getCallbackID();
+	current_frame = MOUSE_OUT;
+}
+
+void MenuButton::setCallback( void (*func)()  ) {
+	callback = func;
+}
+
+int MenuButton::getCallbackID() const {
+	return callback_id;
+}
