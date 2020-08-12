@@ -14,7 +14,7 @@ std::string GameOverState::getStateID() const {
 }
 
 void GameOverState::gameOverToMain() {
-	Game::getInstance()->getStateMachine()->changeState(new MenuState());
+	Game::getInstance()->getStateMachine()->changeState(new MainMenuState());
 }
 
 void GameOverState::restartPlay() {
@@ -50,8 +50,13 @@ bool GameOverState::onEnter() {
 																		"restartButton", 3);
 
 		GameObject * game_over = new AnimatedGraphic(params_game_over, 2);
-		GameObject * main_but = new MenuButton(params_main, gameOverToMain);
-		GameObject * restart_but = new MenuButton(params_restart, restartPlay);
+		GameObject * main_but = new MenuButton();
+		main_but->load(params_main);
+		(dynamic_cast<MenuButton *> (main_but) )->setCallback(gameOverToMain);
+
+		GameObject * restart_but = new MenuButton();
+		restart_but->load(params_restart);
+		(dynamic_cast<MenuButton *> (restart_but) )->setCallback(restartPlay);
 
 		game_over_objects.push_back(game_over);
 		game_over_objects.push_back(main_but);
