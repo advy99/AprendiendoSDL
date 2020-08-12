@@ -49,6 +49,9 @@ class Game{
 
 		GameStateMachine * getStateMachine();
 
+		Game(const Game & other) = delete;
+		Game& operator = (const Game & other) = delete;
+
 
 };
 
