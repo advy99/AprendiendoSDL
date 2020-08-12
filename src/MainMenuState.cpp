@@ -37,6 +37,8 @@ bool MainMenuState::onEnter() {
 	callbacks.push_back(menuToPlay);
 	callbacks.push_back(exitFromMenu);
 
+	setCallbacks(callbacks);
+
 	return success;
 
 }
