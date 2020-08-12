@@ -70,7 +70,8 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 				InputHandler::getInstance()->initialiseJoysticks();
 
 				game_state_machine = new GameStateMachine();
-				game_state_machine->changeState(new MenuState());
+				game_state_machine->changeState(new MainMenuState());
+				GameObjectFactory::getInstance()->registerType("MenuButton", new MenuButtonCreator());
 
 			}
 		}
