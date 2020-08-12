@@ -14,38 +14,40 @@ bool StateParser::parseState(const char * state_file,
 	if ( success ) {
 		tinyxml2::XMLElement * root = xml_doc.RootElement();
 
-		tinyxml2::XMLElement * state_root = nullptr;
+		if ( root != nullptr ) {
 
-		for ( tinyxml2::XMLElement * xml_ele = root->FirstChildElement();
-				xml_ele != nullptr; xml_ele = xml_ele->NextSiblingElement() ) {
-			if ( xml_ele->Value() == state_id ) {
-				state_root = xml_ele;
+			tinyxml2::XMLElement * state_root = nullptr;
+
+			for ( tinyxml2::XMLElement * xml_ele = root->FirstChildElement();
+					xml_ele != nullptr; xml_ele = xml_ele->NextSiblingElement() ) {
+				if ( xml_ele->Value() == state_id ) {
+					state_root = xml_ele;
+				}
 			}
-		}
 
-		tinyxml2::XMLElement * texture_root = nullptr;
+			tinyxml2::XMLElement * texture_root = nullptr;
 
-		for ( tinyxml2::XMLElement * xml_ele = state_root->FirstChildElement();
-				xml_ele != nullptr; xml_ele = xml_ele->NextSiblingElement() ) {
-			if ( xml_ele->Value() == std::string("TEXTURES" )) {
-				texture_root = xml_ele;
+			for ( tinyxml2::XMLElement * xml_ele = state_root->FirstChildElement();
+					xml_ele != nullptr; xml_ele = xml_ele->NextSiblingElement() ) {
+				if ( xml_ele->Value() == std::string("TEXTURES" )) {
+					texture_root = xml_ele;
+				}
 			}
-		}
 
-		parseTextures(texture_root, texture_ids);
+			parseTextures(texture_root, texture_ids);
 
 
-		tinyxml2::XMLElement * object_root = nullptr;
+			tinyxml2::XMLElement * object_root = nullptr;
 
-		for ( tinyxml2::XMLElement * xml_ele = state_root->FirstChildElement();
-				xml_ele != nullptr; xml_ele = xml_ele->NextSiblingElement() ) {
-			if ( xml_ele->Value() == std::string("OBJECTS" )) {
-				texture_root = xml_ele;
+			for ( tinyxml2::XMLElement * xml_ele = state_root->FirstChildElement();
+					xml_ele != nullptr; xml_ele = xml_ele->NextSiblingElement() ) {
+				if ( xml_ele->Value() == std::string("OBJECTS" )) {
+					texture_root = xml_ele;
+				}
 			}
+
+			parseObjects(object_root, objects);
 		}
-
-		parseObjects(object_root, objects);
-
 
 	} else {
 		std::cerr << xml_doc.ErrorStr() << std::endl;
