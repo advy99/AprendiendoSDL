@@ -50,3 +50,13 @@ GameObject * GameObjectFactory::create(const std::string type_id){
 	return created_object;
 
 }
+
+GameObjectFactory * GameObjectFactory::getInstance() {
+	if ( instance == nullptr ) {
+		instance = new GameObjectFactory();
+	}
+
+	return instance;
+}
+
+GameObjectFactory * GameObjectFactory::instance = nullptr;

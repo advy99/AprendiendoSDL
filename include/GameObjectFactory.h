@@ -20,8 +20,15 @@ class GameObjectFactory {
 		std::map<std::string, BaseCreator *> creators;
 
 		void clean();
+		GameObjectFactory();
+
+		static GameObjectFactory * instance;
 
 	public:
+		void operator = (const GameObjectFactory & other) = delete;
+		GameObjectFactory(const GameObjectFactory & other) = delete;
+		GameObjectFactory * getInstance();
+
 		~GameObjectFactory();
 		bool registerType(const std::string type_id,  BaseCreator * creator);
 		GameObject * create(const std::string type_id);
