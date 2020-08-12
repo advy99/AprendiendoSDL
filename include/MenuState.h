@@ -6,25 +6,10 @@
 #include <vector>
 
 class MenuState : public GameState {
-	private:
-		static const std::string menu_id;
-
-		std::vector<GameObject *> menu_objects;
-
-		static void menuToPlay();
-		static void exitFromMenu();
-
-		virtual bool onExit();
-
-	public:
-		virtual ~MenuState();
-		virtual void update();
-		virtual void render();
-
-		virtual bool onEnter();
-
-		virtual std::string getStateID() const;
-
+	protected:
+		typedef void(*Callback)();
+		virtual void setCallbacks(const std::vector<Callback> & callbacks) = 0;
+		std::vector<Callback> callbacks;
 };
 
 
