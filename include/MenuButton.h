@@ -2,6 +2,7 @@
 #define MENUBUTTON_H_INCLUDED
 
 #include "SDLGameObject.h"
+#include "GameObjectFactory.h"
 
 class MenuButton : public SDLGameObject {
 	private:
@@ -12,17 +13,29 @@ class MenuButton : public SDLGameObject {
 		};
 
 		void (*callback) ();
+		int callback_id;
 
 		bool button_released;
 
 	public:
-		MenuButton(const LoaderParams * params, void (*func)());
+		MenuButton();
 
 		virtual void draw();
 		virtual void update();
 		virtual void clean();
+		virtual void load(const LoaderParams * params);
+
+		void setCallback( void (*func)()  );
+		int getCallbackID() const;
 
 };
 
+
+class MenuButtonCreator : public BaseCreator {
+
+	public:
+		GameObject * createGameObject() const;
+
+};
 
 #endif

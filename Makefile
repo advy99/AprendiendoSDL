@@ -12,10 +12,12 @@ MENSAJE = "Compilando\ usando\ C++17,\ con\ máxima\ optimización\ \
 
 OBJETIVO = $(BIN)/main
 OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/LoaderParams.o $(OBJ)/SDLGameObject.o \
-			 $(OBJ)/Player.o $(OBJ)/Vector2D.o $(OBJ)/MenuState.o $(OBJ)/Enemy.o \
-			 $(OBJ)/PlayState.o $(OBJ)/InputHandler.o $(OBJ)/Game.o \
-			 $(OBJ)/PauseState.o $(OBJ)/GameStateMachine.o $(OBJ)/MenuButton.o \
-			 $(OBJ)/GameOverState.o $(OBJ)/AnimatedGraphic.o $(OBJ)/main.o
+			 $(OBJ)/Player.o $(OBJ)/Vector2D.o $(OBJ)/MainMenuState.o \
+			 $(OBJ)/Enemy.o $(OBJ)/PlayState.o $(OBJ)/InputHandler.o \
+			 $(OBJ)/Game.o $(OBJ)/PauseState.o $(OBJ)/GameStateMachine.o \
+			 $(OBJ)/MenuButton.o $(OBJ)/GameOverState.o $(OBJ)/AnimatedGraphic.o \
+			 $(OBJ)/tinyxml2.o $(OBJ)/GameObjectFactory.o $(OBJ)/StateParser.o \
+			 $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -88,10 +90,19 @@ $(OBJ)/PlayState.o: $(SRC)/PlayState.cpp
 $(OBJ)/PauseState.o: $(SRC)/PauseState.cpp
 	$(call compilar_objeto,$^,$@)
 
-$(OBJ)/MenuState.o: $(SRC)/MenuState.cpp
+$(OBJ)/StateParser.o: $(SRC)/StateParser.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/tinyxml2.o: $(SRC)/tinyxml2.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/MainMenuState.o: $(SRC)/MainMenuState.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/GameOverState.o: $(SRC)/GameOverState.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/GameObjectFactory.o: $(SRC)/GameObjectFactory.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/MenuButton.o: $(SRC)/MenuButton.cpp

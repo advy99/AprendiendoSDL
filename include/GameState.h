@@ -2,11 +2,13 @@
 #define GAMESTATE_H_INCLUDED
 
 #include <string>
+#include <vector>
 
 class GameState {
 	protected:
 
 		virtual bool onExit() = 0;
+		std::vector<std::string> texture_id_list;
 
 	public:
 		virtual ~GameState() {};

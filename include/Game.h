@@ -9,9 +9,10 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "PlayState.h"
-#include "MenuState.h"
 #include "GameStateMachine.h"
 #include <vector>
+#include "MenuButton.h"
+#include "MainMenuState.h"
 
 class Game{
 	private:
@@ -48,6 +49,9 @@ class Game{
 		void quit();
 
 		GameStateMachine * getStateMachine();
+
+		Game(const Game & other) = delete;
+		Game& operator = (const Game & other) = delete;
 
 
 };
