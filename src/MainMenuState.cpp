@@ -54,6 +54,7 @@ bool MainMenuState::onExit() {
 	}
 
 	menu_objects.clear();
+	callbacks.clear();
 
 	for ( unsigned i = 0; i < texture_id_list.size(); i++ ) {
 		TextureManager::getInstance()->clearFromTextureMap(texture_id_list[i]);
