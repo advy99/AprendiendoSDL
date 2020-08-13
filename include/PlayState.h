@@ -9,7 +9,6 @@
 class PlayState : public GameState {
 	private:
 		static const std::string play_id;
-		std::vector<GameObject *> play_objects;
 		bool checkCollision(const SDLGameObject * p1, const SDLGameObject * p2);
 
 		virtual bool onExit();

@@ -13,6 +13,7 @@
 #include <vector>
 #include "MenuButton.h"
 #include "MainMenuState.h"
+#include "AnimatedGraphic.h"
 
 class Game{
 	private:

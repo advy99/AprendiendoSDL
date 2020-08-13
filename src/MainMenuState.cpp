@@ -11,17 +11,17 @@ MainMenuState::~MainMenuState() {
 }
 
 void MainMenuState::update(){
-	for ( unsigned i = 0; i < menu_objects.size() &&
+	for ( unsigned i = 0; i < objects.size() &&
 								!GameStateMachine::isChanging(); i++ ) {
-		menu_objects[i]->update();
+		objects[i]->update();
 
 	}
 }
 
 void MainMenuState::render() {
-	for ( unsigned i = 0; i < menu_objects.size() &&
+	for ( unsigned i = 0; i < objects.size() &&
 								!GameStateMachine::isChanging(); i++ ) {
-		menu_objects[i]->draw();
+		objects[i]->draw();
 	}
 
 }
@@ -32,7 +32,7 @@ bool MainMenuState::onEnter() {
 
 	StateParser parser;
 
-	parser.parseState("assets/test.xml", menu_id, &menu_objects, &texture_id_list);
+	parser.parseState("assets/test.xml", menu_id, &objects, &texture_id_list);
 
 	callbacks.push_back(menuToPlay);
 	callbacks.push_back(exitFromMenu);
@@ -44,23 +44,8 @@ bool MainMenuState::onEnter() {
 }
 
 bool MainMenuState::onExit() {
-	std::cout << "Exiting menu" << std::endl;
-
-	bool success = true;
-
-	for ( unsigned i = 0; i < menu_objects.size(); i++ ) {
-		menu_objects[i]->clean();
-		delete menu_objects[i];
-	}
-
-	menu_objects.clear();
-
-	for ( unsigned i = 0; i < texture_id_list.size(); i++ ) {
-		TextureManager::getInstance()->clearFromTextureMap(texture_id_list[i]);
-	}
-
-
-	return success;
+	callbacks.clear();
+	return GameState::onExit();
 
 }
 
@@ -84,8 +69,8 @@ void MainMenuState::exitFromMenu() {
 
 
 void MainMenuState::setCallbacks(const std::vector<Callback> & callbacks) {
-	for ( unsigned i = 0; i < menu_objects.size(); i++ ) {
-		MenuButton * button = dynamic_cast<MenuButton*> (menu_objects[i]) ;
+	for ( unsigned i = 0; i < objects.size(); i++ ) {
+		MenuButton * button = dynamic_cast<MenuButton*> (objects[i]) ;
 		if ( button != nullptr ) {
 			button->setCallback(callbacks[button->getCallbackID() ]);
 		}

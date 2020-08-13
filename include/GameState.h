@@ -3,12 +3,14 @@
 
 #include <string>
 #include <vector>
+#include "GameObject.h"
 
 class GameState {
 	protected:
 
-		virtual bool onExit() = 0;
+		virtual bool onExit();
 		std::vector<std::string> texture_id_list;
+		std::vector<GameObject *> objects;
 
 	public:
 		virtual ~GameState() {};

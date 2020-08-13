@@ -1,20 +1,20 @@
 #ifndef PAUSESTATE_H_INCLUDED
 #define PAUSESTATE_H_INCLUDED
 
-#include "GameState.h"
+#include "MenuState.h"
 #include "GameObject.h"
 #include <vector>
 
-class PauseState : public GameState {
+class PauseState : public MenuState {
 	private:
 		static void pauseToMain();
 		static void resumePlay();
 
 		static const std::string pause_id;
 
-		std::vector<GameObject *> pause_objects;
 
 		virtual bool onExit();
+		virtual void setCallbacks(const std::vector<Callback> & callbacks);
 
 	public:
 		virtual ~PauseState();

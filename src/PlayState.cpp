@@ -4,6 +4,7 @@
 #include "GameOverState.h"
 #include "Game.h"
 #include <iostream>
+#include "StateParser.h"
 
 PlayState::~PlayState() {
 	onExit();
@@ -15,20 +16,22 @@ void PlayState::update() {
 		Game::getInstance()->getStateMachine()->pushState(new PauseState());
 	}
 
-	for ( unsigned i = 0; i < play_objects.size() && !GameStateMachine::isChanging(); i++ ) {
-		play_objects[i]->update();
+	for ( unsigned i = 0; i < objects.size() &&
+			!GameStateMachine::isChanging(); i++ ) {
+		objects[i]->update();
 	}
 
-	if ( checkCollision(dynamic_cast<SDLGameObject *> (play_objects[0]),
-							  dynamic_cast<SDLGameObject *> (play_objects[1]) ) ){
+	if ( checkCollision(dynamic_cast<SDLGameObject *> (objects[0]),
+							  dynamic_cast<SDLGameObject *> (objects[1]) ) ){
 		Game::getInstance()->getStateMachine()->pushState(new GameOverState());
 	}
 
 }
 
 void PlayState::render() {
-	for ( unsigned i = 0; i < play_objects.size() && !GameStateMachine::isChanging(); i++ ) {
-		play_objects[i]->draw();
+	for ( unsigned i = 0; i < objects.size() &&
+			!GameStateMachine::isChanging(); i++ ) {
+		objects[i]->draw();
 	}
 
 }
@@ -36,57 +39,19 @@ void PlayState::render() {
 bool PlayState::onEnter() {
 	std::cout << "Entering Play state" << std::endl;
 
-	bool success;
+	bool success = true;
 
-	success = TextureManager::getInstance()->load("assets/helicopter0.png",
-															"helicopter0",
-															Game::getInstance()->getRenderer());
+	StateParser parser;
 
-
-	success = TextureManager::getInstance()->load("assets/helicopter1.png",
-															"helicopter1",
-															Game::getInstance()->getRenderer());
-
-	if ( success ) {
-		play_objects.clear();
-		LoaderParams * params_player = new LoaderParams(500, 100, 128, 55,
-																		"helicopter0", 5);
-
-		LoaderParams * params_enemy = new LoaderParams(100, 100, 128, 55,
-																		"helicopter1", 5);
-
-		GameObject * player = new Player();
-		player->load(params_player);
-		GameObject * enemy = new Enemy();
-		enemy->load(params_enemy);
-
-		play_objects.push_back(player);
-		play_objects.push_back(enemy);
-
-		delete params_player;
-		delete params_enemy;
-
-	}
+	parser.parseState("assets/test.xml", play_id, &objects,
+							&texture_id_list);
 
 
 	return success;
 }
 
 bool PlayState::onExit() {
-	std::cout << "Exiting Play state" << std::endl;
-
-	bool success = true;
-
-	for ( unsigned i = 0; i < play_objects.size(); i++ ) {
-		play_objects[i]->clean();
-		delete play_objects[i];
-	}
-
-	play_objects.clear();
-	TextureManager::getInstance()->clearFromTextureMap("helicopter0");
-
-
-	return success;
+	return GameState::onExit();
 }
 
 std::string PlayState::getStateID() const {

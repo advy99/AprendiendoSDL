@@ -1,9 +1,7 @@
 #include "AnimatedGraphic.h"
 #include "TextureManager.h"
 
-AnimatedGraphic::AnimatedGraphic(const LoaderParams * params, const int speed)
-											:SDLGameObject(), animation_speed(speed){
-	SDLGameObject::load(params);
+AnimatedGraphic::AnimatedGraphic():SDLGameObject(){
 }
 
 void AnimatedGraphic::update() {
@@ -17,4 +15,13 @@ void AnimatedGraphic::draw() {
 
 void AnimatedGraphic::clean() {
 	SDLGameObject::clean();
+}
+
+void AnimatedGraphic::load(const LoaderParams * params) {
+	SDLGameObject::load(params);
+	animation_speed = params->getAnimSpeed();
+}
+
+GameObject * AnimatedGraphicCreator::createGameObject() const {
+	return new AnimatedGraphic();
 }

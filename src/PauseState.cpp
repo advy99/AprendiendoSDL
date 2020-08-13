@@ -3,6 +3,7 @@
 #include "MainMenuState.h"
 #include "MenuButton.h"
 #include "InputHandler.h"
+#include "StateParser.h"
 
 PauseState::~PauseState() {
 	onExit();
@@ -22,75 +23,51 @@ void PauseState::resumePlay() {
 }
 
 void PauseState::update() {
-	for ( unsigned i = 0; i < pause_objects.size() &&
+	for ( unsigned i = 0; i < objects.size() &&
 								!GameStateMachine::isChanging(); i++ ) {
-		pause_objects[i]->update();
+		objects[i]->update();
 	}
 }
 
 
 void PauseState::render() {
-	for ( unsigned i = 0; i < pause_objects.size() &&
+	for ( unsigned i = 0; i < objects.size() &&
 								!GameStateMachine::isChanging(); i++ ) {
-		pause_objects[i]->draw();
+		objects[i]->draw();
 	}
 }
 
 bool PauseState::onEnter() {
-	bool success;
-	success = TextureManager::getInstance()->load("assets/resume_button.png",
-															"resumeButton",
-															Game::getInstance()->getRenderer());
+	bool success = true;
 
-	if ( success ) {
-		success = TextureManager::getInstance()->load("assets/main_menu_button.png",
-															"mainButton",
-															Game::getInstance()->getRenderer());
-	}
+	StateParser parser;
 
-	if ( success ) {
-		pause_objects.clear();
-		LoaderParams * main_b = new LoaderParams(200, 100, 200, 80,
-																"mainButton", 3);
-		LoaderParams * resume_b = new LoaderParams(200, 300, 200, 80, "resumeButton", 3);
+	parser.parseState("assets/test.xml", pause_id, &objects,
+							&texture_id_list);
 
-		GameObject * main_button = new MenuButton();
-		main_button->load(main_b);
-		(dynamic_cast<MenuButton *> (main_button) )->setCallback(pauseToMain);
+	callbacks.push_back(pauseToMain);
+	callbacks.push_back(resumePlay);
 
-		GameObject * resume_button = new MenuButton();
-		resume_button->load(resume_b);
-		(dynamic_cast<MenuButton *> (resume_button) )->setCallback(pauseToMain);
-
-		pause_objects.push_back(main_button);
-		pause_objects.push_back(resume_button);
-
-		delete resume_b;
-		delete main_b;
-
-	}
+	setCallbacks(callbacks);
 
 	return success;
 }
 
 
 bool PauseState::onExit() {
-	for ( unsigned i = 0; i < pause_objects.size(); i++ ){
-		pause_objects[i]->clean();
-		delete pause_objects[i];
+
+	callbacks.clear();
+	return GameState::onExit();
+}
+
+
+void PauseState::setCallbacks(const std::vector<Callback> & callbacks) {
+	for ( unsigned i = 0; i < objects.size(); i++ ) {
+		MenuButton * button = dynamic_cast<MenuButton*> (objects[i]) ;
+		if ( button != nullptr ) {
+			button->setCallback(callbacks[button->getCallbackID() ]);
+		}
 	}
-
-	pause_objects.clear();
-
-	TextureManager::getInstance()->clearFromTextureMap("resumeButton");
-	TextureManager::getInstance()->clearFromTextureMap("mainButton");
-
-	InputHandler::getInstance()->reset();
-
-
-
-	return true;
-
 }
 
 
