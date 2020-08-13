@@ -43,29 +43,8 @@ bool GameOverState::onEnter() {
 
 bool GameOverState::onExit(){
 
-	bool success = true;
-
-
-	for ( unsigned i = 0; i < objects.size(); i++ ){
-		objects[i]->clean();
-		delete objects[i];
-		objects[i] = nullptr;
-	}
-
-	objects.clear();
-
 	callbacks.clear();
-
-	for ( unsigned i = 0; i < texture_id_list.size(); i++ ) {
-		TextureManager::getInstance()->clearFromTextureMap(texture_id_list[i]);
-	}
-
-
-	InputHandler::getInstance()->reset();
-
-
-	return success;
-
+	return GameState::onExit();
 
 }
 

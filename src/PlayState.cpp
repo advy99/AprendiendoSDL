@@ -51,22 +51,7 @@ bool PlayState::onEnter() {
 }
 
 bool PlayState::onExit() {
-	std::cout << "Exiting Play state" << std::endl;
-
-	bool success = true;
-
-	for ( unsigned i = 0; i < objects.size(); i++ ) {
-		objects[i]->clean();
-		delete objects[i];
-	}
-
-	objects.clear();
-
-	for ( unsigned i = 0; i < texture_id_list.size(); i++ ) {
-		TextureManager::getInstance()->clearFromTextureMap(texture_id_list[i]);
-	}
-
-	return success;
+	return GameState::onExit();
 }
 
 std::string PlayState::getStateID() const {

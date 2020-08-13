@@ -55,24 +55,9 @@ bool PauseState::onEnter() {
 
 
 bool PauseState::onExit() {
-	for ( unsigned i = 0; i < objects.size(); i++ ){
-		objects[i]->clean();
-		delete objects[i];
-	}
 
-	objects.clear();
 	callbacks.clear();
-
-	for ( unsigned i = 0; i < texture_id_list.size(); i++ ) {
-		TextureManager::getInstance()->clearFromTextureMap(texture_id_list[i]);
-	}
-
-	InputHandler::getInstance()->reset();
-
-
-
-	return true;
-
+	return GameState::onExit();
 }
 
 
