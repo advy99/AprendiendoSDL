@@ -13,7 +13,6 @@ class GameOverState : public MenuState {
 
 		static const std::string game_over_id;
 
-		bool exiting;
 
 		virtual bool onExit();
 		virtual void setCallbacks(const std::vector<Callback> & callbacks);

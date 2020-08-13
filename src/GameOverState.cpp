@@ -43,6 +43,8 @@ bool GameOverState::onEnter() {
 
 bool GameOverState::onExit(){
 
+	bool success = true;
+
 
 	for ( unsigned i = 0; i < objects.size(); i++ ){
 		objects[i]->clean();
@@ -62,7 +64,7 @@ bool GameOverState::onExit(){
 	InputHandler::getInstance()->reset();
 
 
-	return exiting;
+	return success;
 
 
 }
