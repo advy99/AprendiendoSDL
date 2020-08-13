@@ -13,6 +13,22 @@
               texture_id="exitbutton" num_frames="3" callback_id="1"></object>
     </OBJECTS>
   </MENU>
-  <PLAY></PLAY>
-  <GAMEOVER></GAMEOVER>
+
+  <PLAY>
+	  <TEXTURES>
+		  <texture filename="assets/helicopter0.png" ID="helicopter0"></texture>
+		  <texture filename="assets/helicopter1.png" ID="helicopter1"></texture>
+	  </TEXTURES>
+
+	  <OBJECTS>
+		  <object type="Player" x="500" y="100" width="128" height="55"
+			  texture_id="helicopter0" num_frames="5"></object>
+		  <object type="Enemy" x="100" y="100" width="128" height="55"
+			  texture_id="helicopter1" num_frames="5"></object>
+	  </OBJECTS>
+  </PLAY>
+
+  <GAMEOVER>
+
+  </GAMEOVER>
 </STATES>
