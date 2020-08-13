@@ -3,19 +3,28 @@
 
 #include "SDLGameObject.h"
 #include "LoaderParams.h"
+#include "GameObjectFactory.h"
 
 class AnimatedGraphic : public SDLGameObject{
 	private:
 		int animation_speed;
 
 	public:
-		AnimatedGraphic(const LoaderParams * params, const int speed);
+		AnimatedGraphic();
 
 		virtual void draw();
 		virtual void update();
 		virtual void clean();
+		virtual void load(const LoaderParams * params);
 
 };
 
+
+class AnimatedGraphicCreator : public BaseCreator {
+
+	public:
+		GameObject * createGameObject() const;
+
+};
 
 #endif
