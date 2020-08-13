@@ -1,12 +1,12 @@
 #ifndef GAMEOVERSTATE_H_INCLUDED
 #define GAMEOVERSTATE_H_INCLUDED
 
-#include "GameState.h"
+#include "MenuState.h"
 #include "GameObject.h"
 #include <vector>
 
 
-class GameOverState : public GameState {
+class GameOverState : public MenuState {
 	private:
 		static void gameOverToMain();
 		static void restartPlay();
@@ -18,6 +18,7 @@ class GameOverState : public GameState {
 		bool exiting;
 
 		virtual bool onExit();
+		virtual void setCallbacks(const std::vector<Callback> & callbacks);
 
 	public:
 		virtual ~GameOverState();
