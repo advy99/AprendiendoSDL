@@ -78,6 +78,9 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 				GameObjectFactory::getInstance()->registerType("Enemy",
 																		new EnemyCreator());
 
+				GameObjectFactory::getInstance()->registerType("AnimatedGraphic",
+																	new AnimatedGraphicCreator());
+
 				game_state_machine = new GameStateMachine();
 				game_state_machine->changeState(new MainMenuState());
 
