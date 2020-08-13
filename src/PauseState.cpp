@@ -23,17 +23,17 @@ void PauseState::resumePlay() {
 }
 
 void PauseState::update() {
-	for ( unsigned i = 0; i < pause_objects.size() &&
+	for ( unsigned i = 0; i < objects.size() &&
 								!GameStateMachine::isChanging(); i++ ) {
-		pause_objects[i]->update();
+		objects[i]->update();
 	}
 }
 
 
 void PauseState::render() {
-	for ( unsigned i = 0; i < pause_objects.size() &&
+	for ( unsigned i = 0; i < objects.size() &&
 								!GameStateMachine::isChanging(); i++ ) {
-		pause_objects[i]->draw();
+		objects[i]->draw();
 	}
 }
 
@@ -42,7 +42,7 @@ bool PauseState::onEnter() {
 
 	StateParser parser;
 
-	parser.parseState("assets/test.xml", pause_id, &pause_objects,
+	parser.parseState("assets/test.xml", pause_id, &objects,
 							&texture_id_list);
 
 	callbacks.push_back(pauseToMain);
@@ -55,12 +55,12 @@ bool PauseState::onEnter() {
 
 
 bool PauseState::onExit() {
-	for ( unsigned i = 0; i < pause_objects.size(); i++ ){
-		pause_objects[i]->clean();
-		delete pause_objects[i];
+	for ( unsigned i = 0; i < objects.size(); i++ ){
+		objects[i]->clean();
+		delete objects[i];
 	}
 
-	pause_objects.clear();
+	objects.clear();
 	callbacks.clear();
 
 	for ( unsigned i = 0; i < texture_id_list.size(); i++ ) {
@@ -77,8 +77,8 @@ bool PauseState::onExit() {
 
 
 void PauseState::setCallbacks(const std::vector<Callback> & callbacks) {
-	for ( unsigned i = 0; i < pause_objects.size(); i++ ) {
-		MenuButton * button = dynamic_cast<MenuButton*> (pause_objects[i]) ;
+	for ( unsigned i = 0; i < objects.size(); i++ ) {
+		MenuButton * button = dynamic_cast<MenuButton*> (objects[i]) ;
 		if ( button != nullptr ) {
 			button->setCallback(callbacks[button->getCallbackID() ]);
 		}

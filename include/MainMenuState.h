@@ -9,7 +9,6 @@ class MainMenuState : public MenuState {
 	private:
 		static const std::string menu_id;
 
-		std::vector<GameObject *> menu_objects;
 
 		static void menuToPlay();
 		static void exitFromMenu();

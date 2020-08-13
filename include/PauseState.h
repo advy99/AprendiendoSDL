@@ -12,7 +12,6 @@ class PauseState : public MenuState {
 
 		static const std::string pause_id;
 
-		std::vector<GameObject *> pause_objects;
 
 		virtual bool onExit();
 		virtual void setCallbacks(const std::vector<Callback> & callbacks);

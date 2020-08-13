@@ -16,22 +16,22 @@ void PlayState::update() {
 		Game::getInstance()->getStateMachine()->pushState(new PauseState());
 	}
 
-	for ( unsigned i = 0; i < play_objects.size() &&
+	for ( unsigned i = 0; i < objects.size() &&
 			!GameStateMachine::isChanging(); i++ ) {
-		play_objects[i]->update();
+		objects[i]->update();
 	}
 
-	if ( checkCollision(dynamic_cast<SDLGameObject *> (play_objects[0]),
-							  dynamic_cast<SDLGameObject *> (play_objects[1]) ) ){
+	if ( checkCollision(dynamic_cast<SDLGameObject *> (objects[0]),
+							  dynamic_cast<SDLGameObject *> (objects[1]) ) ){
 		Game::getInstance()->getStateMachine()->pushState(new GameOverState());
 	}
 
 }
 
 void PlayState::render() {
-	for ( unsigned i = 0; i < play_objects.size() &&
+	for ( unsigned i = 0; i < objects.size() &&
 			!GameStateMachine::isChanging(); i++ ) {
-		play_objects[i]->draw();
+		objects[i]->draw();
 	}
 
 }
@@ -43,7 +43,7 @@ bool PlayState::onEnter() {
 
 	StateParser parser;
 
-	parser.parseState("assets/test.xml", play_id, &play_objects,
+	parser.parseState("assets/test.xml", play_id, &objects,
 							&texture_id_list);
 
 
@@ -55,12 +55,12 @@ bool PlayState::onExit() {
 
 	bool success = true;
 
-	for ( unsigned i = 0; i < play_objects.size(); i++ ) {
-		play_objects[i]->clean();
-		delete play_objects[i];
+	for ( unsigned i = 0; i < objects.size(); i++ ) {
+		objects[i]->clean();
+		delete objects[i];
 	}
 
-	play_objects.clear();
+	objects.clear();
 
 	for ( unsigned i = 0; i < texture_id_list.size(); i++ ) {
 		TextureManager::getInstance()->clearFromTextureMap(texture_id_list[i]);

@@ -28,7 +28,7 @@ bool GameOverState::onEnter() {
 
 	StateParser parser;
 
-	parser.parseState("assets/test.xml", game_over_id, &game_over_objects,
+	parser.parseState("assets/test.xml", game_over_id, &objects,
 							&texture_id_list);
 
 	callbacks.push_back(gameOverToMain);
@@ -44,13 +44,13 @@ bool GameOverState::onEnter() {
 bool GameOverState::onExit(){
 
 
-	for ( unsigned i = 0; i < game_over_objects.size(); i++ ){
-		game_over_objects[i]->clean();
-		delete game_over_objects[i];
-		game_over_objects[i] = nullptr;
+	for ( unsigned i = 0; i < objects.size(); i++ ){
+		objects[i]->clean();
+		delete objects[i];
+		objects[i] = nullptr;
 	}
 
-	game_over_objects.clear();
+	objects.clear();
 
 	callbacks.clear();
 
@@ -69,23 +69,23 @@ bool GameOverState::onExit(){
 
 
 void GameOverState::update() {
-	for ( unsigned i = 0; i < game_over_objects.size() && !GameStateMachine::isChanging(); i++ ) {
-		game_over_objects[i]->update();
+	for ( unsigned i = 0; i < objects.size() && !GameStateMachine::isChanging(); i++ ) {
+		objects[i]->update();
 	}
 }
 
 
 void GameOverState::render() {
-	for ( unsigned i = 0; i < game_over_objects.size() && !GameStateMachine::isChanging(); i++ ) {
-		game_over_objects[i]->draw();
+	for ( unsigned i = 0; i < objects.size() && !GameStateMachine::isChanging(); i++ ) {
+		objects[i]->draw();
 	}
 }
 
 
 
 void GameOverState::setCallbacks(const std::vector<Callback> & callbacks) {
-	for ( unsigned i = 0; i < game_over_objects.size(); i++ ) {
-		MenuButton * button = dynamic_cast<MenuButton*> (game_over_objects[i]) ;
+	for ( unsigned i = 0; i < objects.size(); i++ ) {
+		MenuButton * button = dynamic_cast<MenuButton*> (objects[i]) ;
 		if ( button != nullptr ) {
 			button->setCallback(callbacks[button->getCallbackID() ]);
 		}

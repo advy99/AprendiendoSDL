@@ -13,8 +13,6 @@ class GameOverState : public MenuState {
 
 		static const std::string game_over_id;
 
-		std::vector<GameObject *> game_over_objects;
-
 		bool exiting;
 
 		virtual bool onExit();
