@@ -4,6 +4,7 @@
 #include "GameOverState.h"
 #include "Game.h"
 #include <iostream>
+#include "StateParser.h"
 
 PlayState::~PlayState() {
 	onExit();
@@ -15,7 +16,8 @@ void PlayState::update() {
 		Game::getInstance()->getStateMachine()->pushState(new PauseState());
 	}
 
-	for ( unsigned i = 0; i < play_objects.size() && !GameStateMachine::isChanging(); i++ ) {
+	for ( unsigned i = 0; i < play_objects.size() &&
+			!GameStateMachine::isChanging(); i++ ) {
 		play_objects[i]->update();
 	}
 
@@ -27,7 +29,8 @@ void PlayState::update() {
 }
 
 void PlayState::render() {
-	for ( unsigned i = 0; i < play_objects.size() && !GameStateMachine::isChanging(); i++ ) {
+	for ( unsigned i = 0; i < play_objects.size() &&
+			!GameStateMachine::isChanging(); i++ ) {
 		play_objects[i]->draw();
 	}
 
@@ -36,37 +39,12 @@ void PlayState::render() {
 bool PlayState::onEnter() {
 	std::cout << "Entering Play state" << std::endl;
 
-	bool success;
+	bool success = true;
 
-	success = TextureManager::getInstance()->load("assets/helicopter0.png",
-															"helicopter0",
-															Game::getInstance()->getRenderer());
+	StateParser parser;
 
-
-	success = TextureManager::getInstance()->load("assets/helicopter1.png",
-															"helicopter1",
-															Game::getInstance()->getRenderer());
-
-	if ( success ) {
-		play_objects.clear();
-		LoaderParams * params_player = new LoaderParams(500, 100, 128, 55,
-																		"helicopter0", 5);
-
-		LoaderParams * params_enemy = new LoaderParams(100, 100, 128, 55,
-																		"helicopter1", 5);
-
-		GameObject * player = new Player();
-		player->load(params_player);
-		GameObject * enemy = new Enemy();
-		enemy->load(params_enemy);
-
-		play_objects.push_back(player);
-		play_objects.push_back(enemy);
-
-		delete params_player;
-		delete params_enemy;
-
-	}
+	parser.parseState("assets/test.xml", play_id, &play_objects,
+							&texture_id_list);
 
 
 	return success;
@@ -83,8 +61,10 @@ bool PlayState::onExit() {
 	}
 
 	play_objects.clear();
-	TextureManager::getInstance()->clearFromTextureMap("helicopter0");
 
+	for ( unsigned i = 0; i < texture_id_list.size(); i++ ) {
+		TextureManager::getInstance()->clearFromTextureMap(texture_id_list[i]);
+	}
 
 	return success;
 }
