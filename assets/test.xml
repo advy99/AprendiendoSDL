@@ -1,32 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <STATES>
-  <MENU>
-    <TEXTURES>
-      <texture filename="assets/play_button.png" ID="playbutton"></texture>
-      <texture filename="assets/exit_button.png" ID="exitbutton"></texture>
-    </TEXTURES>
+	<MENU>
+		<TEXTURES>
+			<texture filename="assets/play_button.png" ID="playbutton"></texture>
+			<texture filename="assets/exit_button.png" ID="exitbutton"></texture>
+		</TEXTURES>
 
-    <OBJECTS>
-      <object type="MenuButton" x="100" y="100" width="400" height="100"
-              texture_id="playbutton" num_frames="3" callback_id="0"></object>
-      <object type="MenuButton" x="100" y="300" width="400" height="100"
-              texture_id="exitbutton" num_frames="3" callback_id="1"></object>
-    </OBJECTS>
-  </MENU>
+		<OBJECTS>
+			<object type="MenuButton" x="100" y="100" width="400" height="100"
+					  texture_id="playbutton" num_frames="3" callback_id="0"></object>
+			<object type="MenuButton" x="100" y="300" width="400" height="100"
+					  texture_id="exitbutton" num_frames="3" callback_id="1"></object>
+		</OBJECTS>
+	</MENU>
 
-  <PLAY>
-	  <TEXTURES>
-		  <texture filename="assets/helicopter0.png" ID="helicopter0"></texture>
-		  <texture filename="assets/helicopter1.png" ID="helicopter1"></texture>
-	  </TEXTURES>
+	<PLAY>
+		<TEXTURES>
+			<texture filename="assets/helicopter0.png" ID="helicopter0"></texture>
+			<texture filename="assets/helicopter1.png" ID="helicopter1"></texture>
+		</TEXTURES>
 
-	  <OBJECTS>
-		  <object type="Player" x="500" y="100" width="128" height="55"
-			  texture_id="helicopter0" num_frames="5"></object>
-		  <object type="Enemy" x="100" y="100" width="128" height="55"
-			  texture_id="helicopter1" num_frames="5"></object>
-	  </OBJECTS>
-  </PLAY>
+		<OBJECTS>
+			<object type="Player" x="500" y="100" width="128" height="55"
+					  texture_id="helicopter0" num_frames="5"></object>
+			<object type="Enemy" x="100" y="100" width="128" height="55"
+					  texture_id="helicopter1" num_frames="5"></object>
+		</OBJECTS>
+	</PLAY>
+
+	<PAUSE>
+		<TEXTURES>
+			<texture filename="assets/main_menu_button.png" ID="mainbutton"></texture>
+			<texture filename="assets/resume_button.png" ID="resumebutton"></texture>
+		</TEXTURES>
+
+		<OBJECTS>
+			<object type="MenuButton" x="200" y="100" width="200" height="80"
+					  texture_id="mainbutton" num_frames="0" callback_id="0"></object>
+			<object type="MenuButton" x="200" y="300" width="200" height="80"
+					  texture_id="resumebutton" num_frames="0" callback_id="1"></object>
+
+		</OBJECTS>
+	</PAUSE>
+
 
   <GAMEOVER>
 
