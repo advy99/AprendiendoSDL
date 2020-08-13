@@ -2,6 +2,7 @@
 #define ENEMY_H_INCLUDED
 
 #include "SDLGameObject.h"
+#include "GameObjectFactory.h"
 
 class Enemy : public SDLGameObject {
 	private:
@@ -15,6 +16,13 @@ class Enemy : public SDLGameObject {
 
 };
 
+
+class EnemyCreator : public BaseCreator {
+
+	public:
+		GameObject * createGameObject() const;
+
+};
 
 
 #endif

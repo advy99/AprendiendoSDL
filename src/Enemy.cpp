@@ -31,7 +31,9 @@ void Enemy::load(const LoaderParams * params) {
 	SDLGameObject::load(params);
 	velocity.setY(2);
 
-	// en el libro pone esto, pero no lo entiendo porque es un int, pero bueno
-	velocity.setX(0.001);
+}
 
+
+GameObject * EnemyCreator::createGameObject() const {
+	return new Enemy();
 }
