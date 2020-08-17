@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "Layer.h"
 
 struct Tileset {
 	int first_grid_id;
@@ -19,6 +20,7 @@ struct Tileset {
 class Level {
 	private:
 		std::vector<Tileset> tilesets;
+		std::vector<Layer *> layers;
 
 
 	public:
@@ -28,7 +30,8 @@ class Level {
 		void update();
 		void render();
 
-		std::vector<Tileset> * getTilesets() const;
+		std::vector<Tileset> * getTilesets();
+		std::vector<Layer *> * getLayers();
 
 };
 
