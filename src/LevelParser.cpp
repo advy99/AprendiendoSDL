@@ -1,4 +1,5 @@
 #include "LevelParser.h"
+#include "Game.h"
 
 
 Level * LevelParser::parseLevel(const char * level_file){
@@ -35,5 +36,34 @@ Level * LevelParser::parseLevel(const char * level_file){
 
 
 	return level;
+
+}
+
+
+void LevelParser::parseTilesets(tinyxml2::XMLElement * tile_element,
+										  std::vector<Tileset> * tilesets){
+
+	const char * element_source = tile_element->FirstChildElement()->
+											Attribute("source");
+	const char * element_name = tile_element->Attribute("name");
+
+	TextureManager::getInstance()->load(element_source, element_name,
+													Game::getInstance()->getRenderer());
+
+	Tileset tileset;
+
+	tileset.width = tile_element->FirstChildElement()->IntAttribute("width");
+	tileset.height = tile_element->FirstChildElement()->IntAttribute("height");
+
+	tileset.first_grid_id = tile_element->IntAttribute("firstgrid");
+	tileset.tile_width = tile_element->IntAttribute("tilewidth");
+	tileset.tile_height = tile_element->IntAttribute("tileheight");
+	tileset.spacing = tile_element->IntAttribute("spacing");
+	tileset.margin = tile_element->IntAttribute("margin");
+	tileset.name = tile_element->Attribute("name");
+
+	tileset.num_columns = tileset.width / (tileset.tile_width + tileset.spacing);
+
+	tilesets->push_back(tileset);
 
 }
