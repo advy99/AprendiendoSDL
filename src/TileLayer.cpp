@@ -1,4 +1,5 @@
 #include "TileLayer.h"
+#include "Game.h"
 
 
 TileLayer::TileLayer(const int TILE_SIZE, const std::vector<Tileset> TILESETS)
