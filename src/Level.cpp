@@ -1,5 +1,10 @@
 #include "Level.h"
 
+Level::~Level() {
+	for ( unsigned i = 0; i < layers.size(); i++ ){
+		delete layers[i];
+	}
+}
 
 std::vector<Tileset> * Level::getTilesets() {
 	return &tilesets;
