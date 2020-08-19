@@ -17,7 +17,7 @@ OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/LoaderParams.o $(OBJ)/SDLGameObject.o \
 			 $(OBJ)/Game.o $(OBJ)/PauseState.o $(OBJ)/GameStateMachine.o \
 			 $(OBJ)/MenuButton.o $(OBJ)/GameOverState.o $(OBJ)/AnimatedGraphic.o \
 			 $(OBJ)/tinyxml2.o $(OBJ)/GameObjectFactory.o $(OBJ)/StateParser.o \
-			 $(OBJ)/GameState.o $(OBJ)/main.o
+			 $(OBJ)/GameState.o $(OBJ)/base64.o $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -35,7 +35,7 @@ debug: all
 define compilar_objeto
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $(2) a partir de $(1)\n"
-	@$(CXX) -c $(FLAGS) $(SDL_LINK) $(1) -I$(INC) -o $(2)
+	@$(CXX) -c $(FLAGS) $(SDL_LINK) $(1) -I$(INC) -I$(HOME)/zlib -o $(2)
 endef
 
 define compilar_binario
@@ -117,6 +117,8 @@ $(OBJ)/AnimatedGraphic.o: $(SRC)/AnimatedGraphic.cpp
 $(OBJ)/GameStateMachine.o: $(SRC)/GameStateMachine.cpp
 	$(call compilar_objeto,$^,$@)
 
+$(OBJ)/base64.o: $(SRC)/base64.cpp
+	$(call compilar_objeto,$^,$@)
 
 FIN:
 	@printf "\n\e[36mCompilación finalizada con éxito\n"
