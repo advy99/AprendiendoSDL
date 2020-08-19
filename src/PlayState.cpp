@@ -5,26 +5,14 @@
 #include "Game.h"
 #include <iostream>
 #include "StateParser.h"
+#include "LevelParser.h"
 
 PlayState::~PlayState() {
 	onExit();
 }
 
 void PlayState::update() {
-
-	if ( InputHandler::getInstance()->isKeyDown(SDL_SCANCODE_ESCAPE) ){
-		Game::getInstance()->getStateMachine()->pushState(new PauseState());
-	}
-
-	for ( unsigned i = 0; i < objects.size() &&
-			!GameStateMachine::isChanging(); i++ ) {
-		objects[i]->update();
-	}
-
-	if ( checkCollision(dynamic_cast<SDLGameObject *> (objects[0]),
-							  dynamic_cast<SDLGameObject *> (objects[1]) ) ){
-		Game::getInstance()->getStateMachine()->pushState(new GameOverState());
-	}
+	level->update();
 
 }
 
@@ -41,16 +29,16 @@ bool PlayState::onEnter() {
 
 	bool success = true;
 
-	StateParser parser;
+	LevelParser parser;
 
-	parser.parseState("assets/test.xml", play_id, &objects,
-							&texture_id_list);
+	level = parser.parseLevel("assets/first_map.tmx");
 
 
 	return success;
 }
 
 bool PlayState::onExit() {
+	delete level;
 	return GameState::onExit();
 }
 
