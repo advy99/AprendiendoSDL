@@ -3,6 +3,11 @@
 
 TileLayer::TileLayer(const int TILE_SIZE, const std::vector<Tileset> TILESETS)
 							:tile_size(TILE_SIZE), tilesets(TILESETS){
+	position = Vector2D(0,0);
+	velocity = Vector2D(0,0);
+
+	num_cols = (Game::getInstance()->getGameWidth() / tile_size);
+	num_rows = (Game::getInstance()->getGameHeight() / tile_size);
 
 }
 
