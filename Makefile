@@ -18,7 +18,8 @@ OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/LoaderParams.o $(OBJ)/SDLGameObject.o \
 			 $(OBJ)/Game.o $(OBJ)/PauseState.o $(OBJ)/GameStateMachine.o \
 			 $(OBJ)/MenuButton.o $(OBJ)/GameOverState.o $(OBJ)/AnimatedGraphic.o \
 			 $(OBJ)/tinyxml2.o $(OBJ)/GameObjectFactory.o $(OBJ)/StateParser.o \
-			 $(OBJ)/GameState.o $(OBJ)/base64.o $(ZLIB_DIR)/libz.a $(OBJ)/main.o
+			 $(OBJ)/GameState.o $(OBJ)/base64.o $(OBJ)/Level.o $(OBJ)/LevelParser.o\
+			 $(OBJ)/TileLayer.o $(ZLIB_DIR)/libz.a $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -121,6 +122,14 @@ $(OBJ)/GameStateMachine.o: $(SRC)/GameStateMachine.cpp
 $(OBJ)/base64.o: $(SRC)/base64.cpp
 	$(call compilar_objeto,$^,$@)
 
+$(OBJ)/Level.o: $(SRC)/Level.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/LevelParser.o: $(SRC)/LevelParser.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/TileLayer.o: $(SRC)/TileLayer.cpp
+	$(call compilar_objeto,$^,$@)
 
 
 $(ZLIB_DIR)/libz.a: $(ZLIB_DIR)/configure $(ZLIB_DIR)/Makefile
