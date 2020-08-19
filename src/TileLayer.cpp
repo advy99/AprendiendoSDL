@@ -1,5 +1,6 @@
 #include "TileLayer.h"
 #include "Game.h"
+#include <iostream>
 
 
 TileLayer::TileLayer(const int TILE_SIZE, const std::vector<Tileset> TILESETS)
@@ -23,7 +24,32 @@ void TileLayer::setTileSize(const int SIZE) {
 }
 
 Tileset TileLayer::getTileset(const int TILE_ID) const {
-	return tilesets[TILE_ID];
+	bool found = false;
+	Tileset tileset;
+
+	for ( unsigned i = 0; i < tilesets.size() && !found; i++ ) {
+
+		if ( i + 1 < tilesets.size() - 1){
+
+			if ( TILE_ID >= tilesets[i].first_grid_id &&
+				  TILE_ID < tilesets[i + 1].first_grid_id	) {
+				found = true;
+				tileset = tilesets[i];
+			}
+
+		} else {
+
+			found = true;
+			tileset = tilesets[i];
+		}
+
+	}
+
+	if ( !found ) {
+		std::cerr << "WARNING: Tileset not found: returning empty tileset" << std::endl;
+	}
+
+	return tileset;
 }
 
 void TileLayer::update(){
