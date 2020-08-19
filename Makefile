@@ -4,6 +4,7 @@ BIN      = $(HOME)/bin
 INC	   = $(HOME)/include
 SRC      = $(HOME)/src
 OBJ      = $(HOME)/obj
+ZLIB_DIR = $(HOME)/zlib
 
 FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 SDL_LINK = -lSDL2 -lSDL2_image
@@ -17,7 +18,7 @@ OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/LoaderParams.o $(OBJ)/SDLGameObject.o \
 			 $(OBJ)/Game.o $(OBJ)/PauseState.o $(OBJ)/GameStateMachine.o \
 			 $(OBJ)/MenuButton.o $(OBJ)/GameOverState.o $(OBJ)/AnimatedGraphic.o \
 			 $(OBJ)/tinyxml2.o $(OBJ)/GameObjectFactory.o $(OBJ)/StateParser.o \
-			 $(OBJ)/GameState.o $(OBJ)/base64.o $(OBJ)/main.o
+			 $(OBJ)/GameState.o $(OBJ)/base64.o $(ZLIB_DIR)/libz.a $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -41,8 +42,8 @@ endef
 define compilar_binario
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(2) a partir de $(1)\n"
-	@$(CXX) $(1) -o $(2) $(SDL_LINK)
-	@printf "\n\e[36mCompilación de $(BIN)/GA_P finalizada con exito.\n\n"
+	@$(CXX) $(1) -o $(2) $(SDL_LINK) -L$(ZLIB_DIR)/z
+	@printf "\n\e[36mCompilación de $(BIN)/main finalizada con exito.\n\n"
 endef
 
 
@@ -120,6 +121,16 @@ $(OBJ)/GameStateMachine.o: $(SRC)/GameStateMachine.cpp
 $(OBJ)/base64.o: $(SRC)/base64.cpp
 	$(call compilar_objeto,$^,$@)
 
+
+
+$(ZLIB_DIR)/libz.a: $(ZLIB_DIR)/configure $(ZLIB_DIR)/Makefile
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mcreando la librería libz.a\n"
+	@cd $(ZLIB_DIR) && ./configure --static &> /dev/null
+	@$(MAKE) -C $(ZLIB_DIR) &> /dev/null
+
+
+
 FIN:
 	@printf "\n\e[36mCompilación finalizada con éxito\n"
 
@@ -128,4 +139,6 @@ clean:
 	-@rm $(OBJ)/*.o 2> /dev/null || printf "\e[33mEl directorio $(OBJ) está vacio, nada que limpiar\n"
 	@printf "\e[36mLimpiando el directorio $(BIN)\n"
 	-@rm $(BIN)/* 2> /dev/null || printf "\e[33mEl directorio $(BIN) está vacio, nada que limpiar\n"
+	@printf "\e[36mLimpiando la libreria $(ZLIB_DIR)\n"
+	@$(MAKE) -C $(ZLIB_DIR) clean &> /dev/null
 	@printf "\e[36mLimpieza completada\n"
