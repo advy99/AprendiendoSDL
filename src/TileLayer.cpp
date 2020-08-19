@@ -25,3 +25,43 @@ void TileLayer::setTileSize(const int SIZE) {
 Tileset TileLayer::getTileset(const int TILE_ID) const {
 	return tilesets[TILE_ID];
 }
+
+void TileLayer::update(){
+	position += velocity;
+}
+
+void TileLayer::render() {
+	int x = 0;
+	int y = 0;
+	int x2 = 0;
+	int y2 = 0;
+
+	x = position.getX() / tile_size;
+	y = position.getY() / tile_size;
+
+	x2 = int(position.getX()) % tile_size;
+	y2 = int(position.getY()) % tile_size;
+
+	for ( int i = 0; i < num_rows; i++ ) {
+		for ( int j = 0; j < num_cols; j++ ) {
+			int id = tile_ids[i + y][j + x];
+
+			if ( id != 0 ) {
+				Tileset tileset = getTileset(id);
+
+				id--;
+
+				TextureManager::getInstance()->drawTile(tileset.name, 2, 2,
+								(j * tile_size) - x2,
+								(i * tile_size) - y2,
+								tile_size, tile_size,
+								(id - (tileset.first_grid_id - 1)) / tileset.num_columns,
+								(id - (tileset.first_grid_id - 1)) % tileset.num_columns,
+								Game::getInstance()->getRenderer());
+
+			}
+
+		}
+	}
+
+}
