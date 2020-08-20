@@ -15,7 +15,7 @@ class TileLayer : public Layer {
 		Vector2D position;
 		Vector2D velocity;
 
-		const std::vector<Tileset> & tilesets;
+		const std::vector<Tileset> tilesets;
 
 		std::vector<std::vector<int> > tile_ids;
 
