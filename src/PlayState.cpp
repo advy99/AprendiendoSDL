@@ -17,11 +17,7 @@ void PlayState::update() {
 }
 
 void PlayState::render() {
-	for ( unsigned i = 0; i < objects.size() &&
-			!GameStateMachine::isChanging(); i++ ) {
-		objects[i]->draw();
-	}
-
+	level->render();
 }
 
 bool PlayState::onEnter() {
@@ -31,7 +27,7 @@ bool PlayState::onEnter() {
 
 	LevelParser parser;
 
-	level = parser.parseLevel("assets/first_map.tmx");
+	level = parser.parseLevel("assets/first_csv.tmx");
 
 
 	return success;
