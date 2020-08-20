@@ -38,6 +38,11 @@ class TextureManager {
 
 		void clearFromTextureMap(const std::string id);
 
+		void drawTile(const std::string id, const int MARGIN, const int SPACING,
+						  const int X, const int Y, const int WIDTH, const int HEIGHT,
+						  const int CURRENT_ROW, const int CURRENT_FRAME,
+						  SDL_Renderer * renderer);
+
 
 };
 

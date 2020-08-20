@@ -32,6 +32,9 @@ class Game{
 
 		static Game * instance;
 
+		int game_height;
+		int game_width;
+
 	public:
 		static Game * getInstance();
 
@@ -53,6 +56,9 @@ class Game{
 
 		Game(const Game & other) = delete;
 		Game& operator = (const Game & other) = delete;
+
+		int getGameWidth() const;
+		int getGameHeight() const;
 
 
 };

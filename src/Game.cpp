@@ -84,6 +84,9 @@ bool Game::init(const std::string title, const int XPOS, const int YPOS,
 				game_state_machine = new GameStateMachine();
 				game_state_machine->changeState(new MainMenuState());
 
+				game_height = SCREEN_HEIGHT;
+				game_width = SCREEN_WIDTH;
+
 			}
 		}
 	}
@@ -177,5 +180,12 @@ GameStateMachine * Game::getStateMachine() {
 	return game_state_machine;
 }
 
+int Game::getGameWidth() const {
+	return game_width;
+}
+
+int Game::getGameHeight() const {
+	return game_height;
+}
 
 Game * Game::instance = nullptr;

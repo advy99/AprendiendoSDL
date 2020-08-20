@@ -4,6 +4,7 @@ BIN      = $(HOME)/bin
 INC	   = $(HOME)/include
 SRC      = $(HOME)/src
 OBJ      = $(HOME)/obj
+ZLIB_DIR = $(HOME)/zlib
 
 FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 SDL_LINK = -lSDL2 -lSDL2_image
@@ -17,7 +18,8 @@ OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/LoaderParams.o $(OBJ)/SDLGameObject.o \
 			 $(OBJ)/Game.o $(OBJ)/PauseState.o $(OBJ)/GameStateMachine.o \
 			 $(OBJ)/MenuButton.o $(OBJ)/GameOverState.o $(OBJ)/AnimatedGraphic.o \
 			 $(OBJ)/tinyxml2.o $(OBJ)/GameObjectFactory.o $(OBJ)/StateParser.o \
-			 $(OBJ)/GameState.o $(OBJ)/main.o
+			 $(OBJ)/GameState.o $(OBJ)/Level.o $(OBJ)/LevelParser.o\
+			 $(OBJ)/TileLayer.o $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -35,14 +37,14 @@ debug: all
 define compilar_objeto
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $(2) a partir de $(1)\n"
-	@$(CXX) -c $(FLAGS) $(SDL_LINK) $(1) -I$(INC) -o $(2)
+	@$(CXX) -c $(FLAGS) $(SDL_LINK) $(1) -I$(INC) -I$(HOME)/zlib -o $(2)
 endef
 
 define compilar_binario
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(2) a partir de $(1)\n"
-	@$(CXX) $(1) -o $(2) $(SDL_LINK)
-	@printf "\n\e[36mCompilación de $(BIN)/GA_P finalizada con exito.\n\n"
+	@$(CXX) $(1) -o $(2) $(SDL_LINK) -L$(ZLIB_DIR)/z
+	@printf "\n\e[36mCompilación de $(BIN)/main finalizada con exito.\n\n"
 endef
 
 
@@ -118,6 +120,19 @@ $(OBJ)/GameStateMachine.o: $(SRC)/GameStateMachine.cpp
 	$(call compilar_objeto,$^,$@)
 
 
+$(OBJ)/Level.o: $(SRC)/Level.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/LevelParser.o: $(SRC)/LevelParser.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/TileLayer.o: $(SRC)/TileLayer.cpp
+	$(call compilar_objeto,$^,$@)
+
+
+
+
+
 FIN:
 	@printf "\n\e[36mCompilación finalizada con éxito\n"
 
@@ -126,4 +141,6 @@ clean:
 	-@rm $(OBJ)/*.o 2> /dev/null || printf "\e[33mEl directorio $(OBJ) está vacio, nada que limpiar\n"
 	@printf "\e[36mLimpiando el directorio $(BIN)\n"
 	-@rm $(BIN)/* 2> /dev/null || printf "\e[33mEl directorio $(BIN) está vacio, nada que limpiar\n"
+	@printf "\e[36mLimpiando la libreria $(ZLIB_DIR)\n"
+	@$(MAKE) -C $(ZLIB_DIR) clean &> /dev/null
 	@printf "\e[36mLimpieza completada\n"

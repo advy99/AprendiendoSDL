@@ -23,7 +23,7 @@ class Level {
 		std::vector<Layer *> layers;
 
 		friend class LevelParser;
-		Level();
+		Level() {};
 
 	public:
 		~Level();

@@ -1,6 +1,7 @@
 #include "LevelParser.h"
 #include "Game.h"
 #include "TileLayer.h"
+#include "sstream"
 
 
 Level * LevelParser::parseLevel(const char * level_file){
@@ -33,7 +34,6 @@ Level * LevelParser::parseLevel(const char * level_file){
 			parseTileLayer(element, level->getLayers(), level->getTilesets());
 		}
 	}
-
 
 
 	return level;
@@ -77,7 +77,7 @@ void LevelParser::parseTileLayer(tinyxml2::XMLElement * tile_element,
 
 	std::vector<std::vector<int> > data;
 
-	std::string decoded_ids;
+	std::string ids;
 
 	tinyxml2::XMLElement * data_node;
 
@@ -94,9 +94,28 @@ void LevelParser::parseTileLayer(tinyxml2::XMLElement * tile_element,
 			element != nullptr;
 			element = element->NextSibling() ) {
 		tinyxml2::XMLText * text = element->ToText();
-		std::string node_text = text->Value();
-		// TODO : Seguir con zlib
-		//decoded_ids = base64_decode(node_text);
+		ids = text->Value();
 	}
+
+
+
+	std::vector<int> layer_row(width);
+
+	for ( int i = 0; i < height; i++ ){
+		data.push_back(layer_row);
+	}
+
+	std::istringstream iss(ids);
+
+	for ( int i = 0; i < height; i++ ) {
+		for (int j = 0; j < width; j++){
+			std::string value;
+			getline(iss, value, ',');
+			data[i][j] = atoi(value.c_str());
+		}
+	}
+
+	tile_layer->setTileIDs(data);
+	layers->push_back(tile_layer);
 
 }

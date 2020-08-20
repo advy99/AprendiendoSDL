@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "SDLGameObject.h"
 #include <vector>
+#include "Level.h"
 
 class PlayState : public GameState {
 	private:
@@ -12,6 +13,7 @@ class PlayState : public GameState {
 		bool checkCollision(const SDLGameObject * p1, const SDLGameObject * p2);
 
 		virtual bool onExit();
+		Level * level;
 
 	public:
 		virtual ~PlayState();
