@@ -90,3 +90,5 @@ void SoundManager::playSound(const std::string & id, const int loop){
 		Mix_PlayChannel(-1, sound_fxs[id], loop);
 	}
 }
+
+SoundManager * SoundManager::instance = nullptr;
