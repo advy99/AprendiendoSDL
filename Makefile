@@ -19,7 +19,8 @@ OBJETOS = $(OBJ)/TextureManager.o $(OBJ)/LoaderParams.o $(OBJ)/SDLGameObject.o \
 			 $(OBJ)/MenuButton.o $(OBJ)/GameOverState.o $(OBJ)/AnimatedGraphic.o \
 			 $(OBJ)/tinyxml2.o $(OBJ)/GameObjectFactory.o $(OBJ)/StateParser.o \
 			 $(OBJ)/GameState.o $(OBJ)/Level.o $(OBJ)/LevelParser.o\
-			 $(OBJ)/TileLayer.o $(OBJ)/ObjectLayer.o $(OBJ)/main.o
+			 $(OBJ)/TileLayer.o $(OBJ)/ObjectLayer.o $(OBJ)/SoundManager.o \
+			 $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -131,7 +132,8 @@ $(OBJ)/LevelParser.o: $(SRC)/LevelParser.cpp
 $(OBJ)/TileLayer.o: $(SRC)/TileLayer.cpp
 	$(call compilar_objeto,$^,$@)
 
-
+$(OBJ)/SoundManager.o: $(SRC)/SoundManager.cpp
+	$(call compilar_objeto,$^,$@)
 
 
 
