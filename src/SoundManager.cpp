@@ -67,3 +67,25 @@ bool SoundManager::load(const std::string & file_name, const std::string & id,
 	return success;
 
 }
+
+
+void SoundManager::playMusic(const std::string & id, const int loop){
+	auto it = music.find(id);
+
+	if ( it == music.end() ) {
+		std::cerr << "ERROR: No music with the id: " << id << std::endl;
+	} else {
+		Mix_PlayMusic(music[id], loop);
+	}
+}
+
+
+void SoundManager::playSound(const std::string & id, const int loop){
+	auto it = sound_fxs.find(id);
+
+	if ( it == sound_fxs.end() ) {
+		std::cerr << "ERROR: No SFC with the id: " << id << std::endl;
+	} else {
+		Mix_PlayChannel(-1, sound_fxs[id], loop);
+	}
+}
