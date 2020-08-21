@@ -19,6 +19,11 @@ class LevelParser {
 								  std::vector<Layer *> * layers,
 								  const std::vector<Tileset> * tilesets);
 
+		void parseTextures(tinyxml2::XMLElement * root);
+
+		void parseObjectLayer(tinyxml2::XMLElement * object,
+									 std::vector<Layer *> * layers);
+
 
 	public:
 		Level* parseLevel(const char * level_file);

@@ -54,7 +54,7 @@ Tileset TileLayer::getTileset(const int TILE_ID) const {
 
 void TileLayer::update(){
 	position += velocity;
-	velocity.setX(1);
+	// velocity.setX(1);
 }
 
 void TileLayer::render() {
@@ -70,7 +70,7 @@ void TileLayer::render() {
 	y2 = int(position.getY()) % tile_size;
 
 	for ( int i = 0; i < num_rows; i++ ) {
-		for ( int j = 0; j < num_cols; j++ ) {
+		for ( int j = 0; j <= num_cols; j++ ) {
 			int id = tile_ids[i + y][j + x];
 
 			if ( id != 0 ) {
