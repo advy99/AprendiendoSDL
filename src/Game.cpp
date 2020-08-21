@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <iostream>
 #include "InputHandler.h"
-
+#include "SoundManager.h"
 
 Game::Game(){
 	g_window           = nullptr;
@@ -137,6 +137,7 @@ void Game::clean() {
 	g_textures = nullptr;
 
 	InputHandler::getInstance()->clean();
+	SoundManager::getInstance()->clean();
 
 	if (game_state_machine == nullptr){
 		delete game_state_machine;
