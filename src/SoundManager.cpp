@@ -1,4 +1,5 @@
 #include "SoundManager.h"
+#include <iostream>
 
 SoundManager::SoundManager() {
 	Mix_OpenAudio(22050, AUDIO_S16, 2, 4096);
@@ -28,4 +29,41 @@ SoundManager * SoundManager::getInstance() {
 void SoundManager::clean() {
 	if ( instance != nullptr )
 		delete instance;
+}
+
+
+bool SoundManager::load(const std::string & file_name, const std::string & id,
+								const sound_type & type) {
+	bool success = true;
+
+	if ( type == sound_type::SOUND_MUSIC ) {
+		Mix_Music * new_music = Mix_LoadMUS( file_name.c_str() );
+
+		if ( new_music == nullptr ) {
+			std::cerr << "ERROR: Could not load the music " << file_name
+						 << std::endl << Mix_GetError() << std::endl;
+
+			success = false;
+		} else {
+			music[id] = new_music;
+			success = true;
+		}
+
+	} else if ( type == sound_type::SOUND_SFX ) {
+		Mix_Chunk * new_fx = Mix_LoadWAV( file_name.c_str() );
+
+		if ( new_fx == nullptr ) {
+			std::cerr << "ERROR: Could not load SFX " << file_name
+						 << std::endl << Mix_GetError() << std::endl;
+
+			success = false;
+		} else {
+			sound_fxs[id] = new_fx;
+			success = true;
+		}
+
+	}
+
+	return success;
+
 }
