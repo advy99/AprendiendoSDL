@@ -70,7 +70,7 @@ void TileLayer::render() {
 	y2 = int(position.getY()) % tile_size;
 
 	for ( int i = 0; i < num_rows; i++ ) {
-		for ( int j = 0; j <= num_cols; j++ ) {
+		for ( int j = 0; j <= num_cols && j < (int) tile_ids[i].size(); j++ ) {
 			int id = tile_ids[i + y][j + x];
 
 			if ( id != 0 ) {
