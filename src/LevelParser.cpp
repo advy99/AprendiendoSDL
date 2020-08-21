@@ -4,7 +4,6 @@
 #include "sstream"
 #include "ObjectLayer.h"
 
-
 Level * LevelParser::parseLevel(const char * level_file){
 	tinyxml2::XMLDocument level_document;
 	level_document.LoadFile(level_file);
@@ -148,6 +147,7 @@ void LevelParser::parseObjectLayer( tinyxml2::XMLElement * root,
 	for ( tinyxml2::XMLElement * element = root->FirstChildElement();
 			element != nullptr;
 			element = element->NextSiblingElement() ) {
+
 		if ( element->Value() == std::string("object") ) {
 
 			int num_frames = 1, width = 0, height = 0, callback_id = 0, anim_speed = 0;
@@ -177,6 +177,10 @@ void LevelParser::parseObjectLayer( tinyxml2::XMLElement * root,
 							} else if ( pro->Attribute("name") ==
 											std::string("texture_height") ) {
 								height = pro->IntAttribute("value");
+
+							} else if ( pro->Attribute("name") ==
+											std::string("texture_width") ){
+								width = pro->IntAttribute("value");
 
 							} else if ( pro->Attribute("name") ==
 											std::string("texture_id") ){
