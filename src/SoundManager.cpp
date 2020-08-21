@@ -15,6 +15,7 @@ SoundManager::~SoundManager() {
 		Mix_FreeMusic( (*it).second );
 	}
 
+	Mix_CloseAudio();
 }
 
 
