@@ -7,7 +7,7 @@ OBJ      = $(HOME)/obj
 ZLIB_DIR = $(HOME)/zlib
 
 FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
-SDL_LINK = -lSDL2 -lSDL2_image
+SDL_LINK = -lSDL2 -lSDL2_image -lSDL2_mixer
 MENSAJE = "Compilando\ usando\ C++17,\ con\ máxima\ optimización\ \
 			 y\ con\ todos\ los\ warnings\ activados"
 
