@@ -38,13 +38,13 @@ debug: all
 define compilar_objeto
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $(2) a partir de $(1)\n"
-	@$(CXX) -c $(FLAGS) $(SDL_LINK) $(1) -I$(INC) -I$(HOME)/zlib -o $(2)
+	@$(CXX) -c $(FLAGS) $(SDL_LINK) $(1) -I$(INC) -o $(2)
 endef
 
 define compilar_binario
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(2) a partir de $(1)\n"
-	@$(CXX) $(1) -o $(2) $(SDL_LINK) -L$(ZLIB_DIR)/z
+	@$(CXX) $(1) -o $(2) $(SDL_LINK)
 	@printf "\n\e[36mCompilación de $(BIN)/main finalizada con exito.\n\n"
 endef
 
@@ -145,6 +145,4 @@ clean:
 	-@rm $(OBJ)/*.o 2> /dev/null || printf "\e[33mEl directorio $(OBJ) está vacio, nada que limpiar\n"
 	@printf "\e[36mLimpiando el directorio $(BIN)\n"
 	-@rm $(BIN)/* 2> /dev/null || printf "\e[33mEl directorio $(BIN) está vacio, nada que limpiar\n"
-	@printf "\e[36mLimpiando la libreria $(ZLIB_DIR)\n"
-	@$(MAKE) -C $(ZLIB_DIR) clean &> /dev/null
 	@printf "\e[36mLimpieza completada\n"
